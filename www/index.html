@@ -6,36 +6,38 @@
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 		<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.external-png-1.4.5.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-png-1.4.5.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.inline-svg-1.4.5.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css" />
-		<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
 		
 		<script src="js/jquery-1.12.3.min.js"></script>
 		<script src="js/jquery.mobile-1.4.5.js"></script>
-		<script src="js/script.js"></script>
 		<title>DJ Rajobos</title>
 	</head>
 	<body>
-		<div data-role="page" class="demo-page" data-dom-cache="true" id="Principal" data-prev="principal" data-next="siguiente">
-			<div data-role="header" style="overflow:hidden;" data-position="fixed" data-id="hdrmain" data-tap-toggle="false">
-			<h1>DJ RAJOBOS</h1>
-				<a href="#" data-icon="gear" class="ui-btn-right">Opciones</a>
+	<div data-role="page">
+		<div data-role="tabs" id="tabs">
+			<div data-role="header" data-position="fixed">
+				<h1>DJ RAJOBOS</h1>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#Principal" data-transition="pop">Sesiones</a></li>
-						<li><a href="#">Edits</a></li>
-						<li><a href="#SobreMi" data-transition="pop">Sobre mi</a></li>
-						<li><a href="#">Contacto</a></li>
+					  <li><a href="#sesiones" data-ajax="false">Sesiones</a></li>
+					  <li><a href="#sobremi" data-ajax="false">Sobre Mi</a></li>
+					  <li><a href="ajax-content-ignore.html" data-ajax="false">Contacta</a></li>
 					</ul>
-				</div><!-- /navbar -->
-			</div><!-- /header -->
-			<div role="main" class="ui-content">
-				Esta es la pagina 1
+				</div>
 			</div>
+		  <div id="sesiones" class="ui-body-d ui-content">
+			<h1>First tab contents</h1>
+		  </div>
+		  <div id="sobremi" class="ui-body-d ui-content">
+			<ul data-role="listview" data-inset="true">
+				<li><a href="#">Acura</a></li>
+				<li><a href="#">Audi</a></li>
+				<li><a href="#">BMW</a></li>
+				<li><a href="#">Cadillac</a></li>
+				<li><a href="#">Ferrari</a></li>
+			</ul>
+		  </div>
 		</div>
+	</div>
 	</body>
 </html>
