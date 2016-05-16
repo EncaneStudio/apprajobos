@@ -1,7 +1,7 @@
 //Al iniciar la página
 $(document).on('pageinit', function() {
 	//ID del usuario, ID Cliente y posicion inicial de cada cancion (para más adelante)
-	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb"; var position=1, canciones=[];
+	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[];
 	//He añadido el SDK de SoundCloud porque si no, no deja hacer stream
 	SC.initialize({
         client_id: client_id
@@ -13,7 +13,7 @@ $(document).on('pageinit', function() {
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(value.id);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
-			var $li = $("<li>", { "class": "track", "data-position":position });
+			var $li = $("<li>", { "class": "track", "data-position":index });
 			//Cargamos la plantilla track.html...
 			$li.load("track.html", function() {
 				//Y se asignan los datos a la plantilla
@@ -21,21 +21,16 @@ $(document).on('pageinit', function() {
 				$li.find("h2").html(value.title);
 				$li.find("p").html(value.user.username);
 				//Se añade el li creado dinamicamente y refrescamos el listview
-				console.log(index);
 				if(index<5) {
-					console.log("Mas nueva");
-					$("#tracks-masnuevo").append($li).listview("refresh");
+					var $clone = $li.clone();
+					$("#tracks-masnuevo").append($clone).listview("refresh");
 				}
 				if(isEdit(value.duration)==true){
-					console.log("Edit");
 					$("#tracks-edits").append($li).listview("refresh");
 				}else{
-					console.log("Sesion");
 					$("#tracks-sesiones").append($li).listview("refresh");
 				}	
 			});
-			//Se suma la posicion para el siguiente
-			position++;	
 		});
 	});
 	
