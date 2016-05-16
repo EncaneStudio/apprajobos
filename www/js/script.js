@@ -35,7 +35,7 @@ $(document).on('pageinit', function() {
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
-	$("#tracks").on("click","li", function() {
+	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
 		SC.stream("/tracks/"+canciones[id]).then(function(player){
 			player.play();
