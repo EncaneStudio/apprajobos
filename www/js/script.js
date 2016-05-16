@@ -10,7 +10,7 @@ $(document).on('pageinit', function() {
 	$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
 		//Por cada objeto...
 		$(tracks).each(function(index,value) {
-			//alameceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
+			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(value.id);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
 			var $li = $("<li>", { "class": "track", "data-position":position });
@@ -21,8 +21,8 @@ $(document).on('pageinit', function() {
 				$li.find("h2").html(value.title);
 				$li.find("p").html(value.user.username);
 				//Se añade el li creado dinamicamente y refrescamos el listview
-				console.log(position);
-				if(position<=5) {
+				console.log(index);
+				if(index<5) {
 					console.log("Mas nueva");
 					$("#tracks-masnuevo").append($li).listview("refresh");
 				}
