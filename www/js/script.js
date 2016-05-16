@@ -27,8 +27,6 @@ $(document).on('pageinit', function() {
 			});
 			position++;	
 		});
-		
-		alert(convertirTiempo(3600));
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
@@ -41,16 +39,19 @@ $(document).on('pageinit', function() {
 });
 
 /* @Author: Mario
-   @Description: Convert MilliSecond to Second's
-   @Param Input: Time in milliseconds
-   @Param Output: Time in seconds
+   @Description: Convert MilliSecond to Second's and save if is Edit or not (not = sesion)
+   @Param Input: Duration audio in milliseconds
+   @Param Output: False = audio is a sesion, True = audio is a edit
 */
-function convertirTiempo(mil){
+function isEdit(mil){	
+	var isEdit = false;
+    var durationAudioInSeconds =  (mil/1000/60);
+	var minToIsSesion = 600; // seconds
 	
-        var tiempo = {
-            min : (mil/1000/60) << 0,
-            sec : parseInt((mil/1000) % 60)
-        };
-
-        return tiempo;
+	// min to edit 600 seconds or 10 minutes.
+	if(durationAudioInSeconds <= minToIsSesion){
+		isEdit = true;
+	}
+	
+    return isEdit;
 }
