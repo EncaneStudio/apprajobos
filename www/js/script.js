@@ -39,7 +39,7 @@ $(document).on('pageinit', function() {
 });
 
 /* @Author: Mario
-   @Description: Convert MilliSecond to Second's and save if is Edit or not (not = sesion)
+   @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)
    @Param Input: Duration audio in milliseconds
    @Param Output: False = audio is a sesion, True = audio is a edit
 */
