@@ -21,10 +21,20 @@ $(document).on('pageinit', function() {
 				$li.find("h2").html(value.title);
 				$li.find("p").html(value.user.username);
 				//Se añade el li creado dinamicamente y refrescamos el listview
-				$("#tracks").append($li).listview("refresh");
-				//Se suma la posicion para el siguiente
-				
+				console.log(position);
+				if(position<=5) {
+					console.log("Mas nueva");
+					$("#tracks-masnuevo").append($li).listview("refresh");
+				}
+				if(isEdit(value.duration)==true){
+					console.log("Edit");
+					$("#tracks-edits").append($li).listview("refresh");
+				}else{
+					console.log("Sesion");
+					$("#tracks-sesiones").append($li).listview("refresh");
+				}	
 			});
+			//Se suma la posicion para el siguiente
 			position++;	
 		});
 	});
@@ -45,7 +55,7 @@ $(document).on('pageinit', function() {
 */
 function isEdit(mil){	
 	var isEdit = false;
-    var durationAudioInSeconds =  (mil/1000/60);
+    var durationAudioInSeconds =  (mil/1000);
 	var minToIsSesion = 600; // seconds
 	
 	// min to edit 600 seconds or 10 minutes.

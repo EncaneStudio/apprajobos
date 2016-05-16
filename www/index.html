@@ -23,7 +23,7 @@
 					<div align="center"><img src="img/headlogo.png" /></div>
 					<div data-role="navbar" >
 						<ul>
-						  <li class="tab"><a href="#portada" data-ajax="false">Lo + Nuevo</a></li>
+						  <li class="tab ui-tabs-active"><a href="#portada" class="ui-btn-active" data-ajax="false">Lo + Nuevo</a></li>
 						  <li class="tab"><a href="#sesiones" data-ajax="false">Sesiones</a></li>
 						  <li class="tab"><a href="#edits" data-ajax="false">Edits</a></li>
 						  <li class="tab"><a href="#sobremi" data-ajax="false">Sobre Mi</a></li>
@@ -31,8 +31,14 @@
 						</ul>
 					</div>
 				</div>
+				<div id="portada" class="ui-body-d ui-content">
+					<ul id="tracks-masnuevo" data-role="listview"></ul>
+				</div>
 				<div id="sesiones" class="ui-body-d ui-content">
-					<ul id="tracks" data-role="listview"></ul>
+					<ul id="tracks-sesiones" data-role="listview"></ul>
+				</div>
+				<div id="edits" class="ui-body-d ui-content">
+					<ul id="tracks-edits" data-role="listview"></ul>
 				</div>
 				<div id="sobremi" class="ui-body-d ui-content">
 					<img src="img/rajobos.png" align="left"/>
