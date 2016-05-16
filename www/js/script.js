@@ -27,6 +27,8 @@ $(document).on('pageinit', function() {
 			});
 			position++;	
 		});
+		
+		alert(convertirTiempo(3600));
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
@@ -37,3 +39,18 @@ $(document).on('pageinit', function() {
 		});
 	});
 });
+
+/* @Author: Mario
+   @Description: Convert MilliSecond to Second's
+   @Param Input: Time in milliseconds
+   @Param Output: Time in seconds
+*/
+function convertirTiempo(mil){
+	
+        var tiempo = {
+            min : (mil/1000/60) << 0,
+            sec : parseInt((mil/1000) % 60)
+        };
+
+        return tiempo;
+}
