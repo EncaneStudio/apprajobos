@@ -7,6 +7,7 @@
 		<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" type="text/css" href="css/theme.css" />
 		
 		<script src="js/index.js"></script>
 		<script src="js/jquery-1.12.3.min.js"></script>
@@ -18,19 +19,23 @@
 	<body>
 		<div data-role="page">
 			<div data-role="tabs" id="tabs">
-				<div data-role="navbar" data-position="fixed">
-					<ul>
-					  <li><a href="#sesiones" data-ajax="false">Sesiones</a></li>
-					  <li><a href="#sobremi" data-ajax="false">Sobre Mi</a></li>
-					  <li><a href="#contacta" data-ajax="false">Contacta</a></li>
-					</ul>
+				<div data-role="header" data-position="fixed" class="header" data-tap-toggle="false">
+					<div align="center"><img src="img/headlogo.png" /></div>
+					<div data-role="navbar" >
+						<ul>
+						  <li class="tab"><a href="#portada" data-ajax="false">Lo + Nuevo</a></li>
+						  <li class="tab"><a href="#sesiones" data-ajax="false">Sesiones</a></li>
+						  <li class="tab"><a href="#edits" data-ajax="false">Edits</a></li>
+						  <li class="tab"><a href="#sobremi" data-ajax="false">Sobre Mi</a></li>
+						  <li class="tab"><a href="#contacta" data-ajax="false" class="ui-btn ui-icon-mail ui-btn-icon-left">&nbsp;</a></li>
+						</ul>
+					</div>
 				</div>
-
 				<div id="sesiones" class="ui-body-d ui-content">
 					<ul id="tracks" data-role="listview"></ul>
 				</div>
 				<div id="sobremi" class="ui-body-d ui-content">
-					<div align="center"><img src="http://lafusionperfecta.net/wp-content/uploads/2015/05/sandro-250x250.png" /></div>
+					<img src="img/rajobos.png" align="left"/>
 					Alejandro “Dj Rajobos “López Deejay Alicantino, enganchado a este mundo de la música desde muy pequeño, empezó a trastear con vinilos, reproductores, mesas, a los 14 años… Hasta que a los 18 años empezó a colgar sesiones en la red. Gran amante del Latín house, pasando por reggaeton y electro comercial, ha trabajado en: IMPACTO (ALICANTE). CAFÉ SUQUIA (ALICANTE). HOT VIP DISCOTECA (ALICANTE). DISCOTECA BB. Guardamar del Segura (ALICANTE). DISCOTECA APACHE. San Isidro (ALICANTE). DISCOTECA 40GRADOS. San Isidro (ALICANTE) DISCOTECA BUDABARLO. Guardamar del Segura.(ALICANTE) Actualmente Residente en Discoteca OZ Torrevieja (ALICANTE).
 				</div>
 				<div id="contacta" class="ui-body-d ui-content">

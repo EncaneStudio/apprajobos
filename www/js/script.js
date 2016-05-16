@@ -20,7 +20,6 @@ $(document).on('pageinit', function() {
 				$li.find("img").attr("src",value.artwork_url);
 				$li.find("h2").html(value.title);
 				$li.find("p").html(value.user.username);
-				$li.css("background","url('https://w1.sndcdn.com/MQtKyhtukVco_m.png') #000");
 				//Se añade el li creado dinamicamente y refrescamos el listview
 				$("#tracks").append($li).listview("refresh");
 				//Se suma la posicion para el siguiente
