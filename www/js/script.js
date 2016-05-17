@@ -20,15 +20,19 @@ $(document).on('pageinit', function() {
 				$li.find("img").attr("src",value.artwork_url);
 				$li.find("h2").html(value.title);
 				$li.find("p").html(value.user.username);
+				var $clonePlaylist = $li.clone();
 				//Se añade el li creado dinamicamente y refrescamos el listview
 				if(index<5) {
 					var $clone = $li.clone();
 					$("#tracks-masnuevo").append($clone).listview("refresh");
+					$("#tracks-playlist").append($clonePlaylist).listview("refresh");
 				}
 				if(isEdit(value.duration)==true){
 					$("#tracks-edits").append($li).listview("refresh");
+					$("#tracks-playlist").append($clonePlaylist).listview("refresh");
 				}else{
 					$("#tracks-sesiones").append($li).listview("refresh");
+					$("#tracks-playlist").append($clonePlaylist).listview("refresh");
 				}	
 			});
 		});
@@ -37,6 +41,11 @@ $(document).on('pageinit', function() {
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
+		var cover = $(this).find("img").attr("src");
+		var titulo = $(this).find("h2").html();
+		
+		$("#reproductor").find(".coverPlayingNow").attr("src",cover);
+		$("#reproductor").find(".titlePlayingNow").html(titulo);
 		SC.stream("/tracks/"+canciones[id]).then(function(player){
 			player.play();
 		});

@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/theme.css" />
 		
+		
 		<script src="js/index.js"></script>
 		<script src="js/jquery-1.12.3.min.js"></script>
 		<script src="js/jquery.mobile-1.4.5.js"></script>
@@ -18,8 +19,18 @@
 	</head>
 	<body>
 		<div data-role="page">
+			<div data-theme="b" data-display="push" data-position="left" data-position-fixed="true" data-role="panel" id="reproductor">
+				<div class="ui-panel-inner" align="center">
+					<h3>Reproduciendo</h3>
+					<h4 class="titlePlayingNow">--</h4>
+					<img class="coverPlayingNow" src="" /><br>
+					<h3>Playlist</h3>
+					<ul class="tracklist" id="tracks-playlist" data-role="listview"></ul>
+				</div>
+			</div>
 			<div data-role="tabs" id="tabs">
 				<div data-role="header" data-position="fixed" class="header" data-tap-toggle="false">
+					<a href="#reproductor"><img src="img/media_equalizer.gif" /></a>
 					<div align="center"><img src="img/headlogo.png" /></div>
 					<div data-role="navbar" >
 						<ul>
