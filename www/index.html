@@ -21,14 +21,24 @@
 		<div data-role="page">
 			<div data-theme="b" data-display="push" data-position="left" data-position-fixed="true" data-role="panel" id="reproductor">
 				<div class="ui-panel-inner" align="center">
-					<h3>Reproduciendo</h3>
-					<h4 class="titlePlayingNow">--</h4>
-					<img class="coverPlayingNow" src="" /><br>
-					<a href="#">Play</a>
-					<a href="#">Pause</a>
-					<a href="#">Pause</a>
-					<h3>Playlist</h3>
-					<ul class="tracklist" id="tracks-playlist" data-role="listview"></ul>
+					<script>
+						ToneDenReady = window.ToneDenReady || [];
+						ToneDenReady.push(function() {
+							ToneDen.configure({
+								soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+							});
+							// This is where all the action happens:
+							ToneDen.player.create({
+								dom: "#player",
+								eq: "waves",
+								skin: "dark",
+								urls: [
+									"https://soundcloud.com/djrajobosmusic"
+								]
+							});
+						});
+					</script>
+					<div id="player"></div>
 				</div>
 			</div>
 			<div data-role="tabs" id="tabs">
@@ -64,6 +74,8 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/toneden.loader.js"></script>
+		<script type="text/javascript" src="js/toneden.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript">
