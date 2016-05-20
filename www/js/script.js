@@ -35,17 +35,18 @@ $(document).on('pageinit', function() {
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
-	/*$(".tracklist").on("click","li", function() {
+	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
-		var cover = $(this).find("img").attr("src");
-		var titulo = $(this).find("h2").html();
+		//var cover = $(this).find("img").attr("src");
+		//var titulo = $(this).find("h2").html();
 		
-		$("#reproductor").find(".coverPlayingNow").attr("src",cover);
-		$("#reproductor").find(".titlePlayingNow").html(titulo);
-		SC.stream("/tracks/"+canciones[id]).then(function(player){
-			player.play();
-		});
-	});*/
+		//$("#reproductor").find(".coverPlayingNow").attr("src",cover);
+		//$("#reproductor").find(".titlePlayingNow").html(titulo);
+		ToneDen.player.getInstanceByDom("#player").skipTo(id);
+		//SC.stream("/tracks/"+canciones[id]).then(function(player){
+		//	player.play();
+		//});
+	});
 });
 
 /* @Author: Mario
