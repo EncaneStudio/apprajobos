@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" type="text/css" href="css/theme.css" />
 		
+		
 		<script src="js/index.js"></script>
 		<script src="js/jquery-1.12.3.min.js"></script>
 		<script src="js/jquery.mobile-1.4.5.js"></script>
@@ -18,12 +19,36 @@
 	</head>
 	<body>
 		<div data-role="page">
+			<div data-theme="b" data-display="push" data-position="left" data-position-fixed="true" data-role="panel" id="reproductor">
+				<div class="ui-panel-inner" align="center">
+					<script>
+						ToneDenReady = window.ToneDenReady || [];
+						ToneDenReady.push(function() {
+							ToneDen.configure({
+								soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+							});
+							// This is where all the action happens:
+							ToneDen.player.create({
+								dom: "#player",
+								eq: "waves",
+								skin: "dark",
+								tracksPerArtist: 25,
+								urls: [
+									"https://soundcloud.com/djrajobosmusic"
+								]
+							});
+						});
+					</script>
+					<div id="player"></div>
+				</div>
+			</div>
 			<div data-role="tabs" id="tabs">
 				<div data-role="header" data-position="fixed" class="header" data-tap-toggle="false">
+					<a href="#reproductor"><img src="img/media_equalizer.gif" /></a>
 					<div align="center"><img src="img/headlogo.png" /></div>
 					<div data-role="navbar" >
 						<ul>
-						  <li class="tab"><a href="#portada" data-ajax="false">Lo + Nuevo</a></li>
+						  <li class="tab ui-tabs-active"><a href="#portada" class="ui-btn-active" data-ajax="false">Lo + Nuevo</a></li>
 						  <li class="tab"><a href="#sesiones" data-ajax="false">Sesiones</a></li>
 						  <li class="tab"><a href="#edits" data-ajax="false">Edits</a></li>
 						  <li class="tab"><a href="#sobremi" data-ajax="false">Sobre Mi</a></li>
@@ -31,8 +56,14 @@
 						</ul>
 					</div>
 				</div>
+				<div id="portada" class="ui-body-d ui-content">
+					<ul class="tracklist" id="tracks-masnuevo" data-role="listview"></ul>
+				</div>
 				<div id="sesiones" class="ui-body-d ui-content">
-					<ul id="tracks" data-role="listview"></ul>
+					<ul class="tracklist" id="tracks-sesiones" data-role="listview"></ul>
+				</div>
+				<div id="edits" class="ui-body-d ui-content">
+					<ul class="tracklist" id="tracks-edits" data-role="listview"></ul>
 				</div>
 				<div id="sobremi" class="ui-body-d ui-content">
 					<img src="img/rajobos.png" align="left"/>
@@ -44,6 +75,8 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/toneden.loader.js"></script>
+		<script type="text/javascript" src="js/toneden.js"></script>
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript">
