@@ -19,29 +19,6 @@
 	</head>
 	<body>
 		<div data-role="page">
-			<div data-theme="b" data-display="push" data-position="left" data-position-fixed="true" data-role="panel" id="reproductor">
-				<div class="ui-panel-inner" align="center">
-					<script>
-						ToneDenReady = window.ToneDenReady || [];
-						ToneDenReady.push(function() {
-							ToneDen.configure({
-								soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
-							});
-							// This is where all the action happens:
-							ToneDen.player.create({
-								dom: "#player",
-								eq: "waves",
-								skin: "dark",
-								tracksPerArtist: 100,
-								urls: [
-									"https://soundcloud.com/djrajobosmusic"
-								]
-							});
-						});
-					</script>
-					<div id="player"></div>
-				</div>
-			</div>
 			<div data-role="tabs" id="tabs">
 				<div data-role="header" data-position="fixed" class="header" data-tap-toggle="false">
 					<a href="#reproductor"><img src="img/media_equalizer.gif" /></a>
@@ -74,6 +51,51 @@
 				
 				</div>
 			</div>
+			<div data-role="footer" data-tap-toggle="false" data-position="fixed" data-fullscreen="true">
+				<marquee><h1></h1></marquee>
+				<div class="td tdrow player dark shrink" data-reactid=".1jo">
+					<div id="" class="tdcolumns tdlarge-12 tdsmall-12 tdlarge-centered tdbody" data-reactid=".1jo.0">
+						<div id="" class="tdrow controls">
+							<div id="" class="tdcolumns tdlarge-6 tdsmall-12 button-controls">
+								<i class="tdicon-angle-double-left player-prev prev"></i>
+								<i class="tdicon-play-circle-outline player-play play" ></i>
+								<i class="tdicon-angle-double-right player-next next" ></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div data-role="page" id="reproductor">
+			<script>
+				ToneDenReady = window.ToneDenReady || [];
+				ToneDenReady.push(function() {
+					ToneDen.configure({
+						soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+					});
+					// This is where all the action happens:
+					ToneDen.player.create({
+						dom: "#player",
+						eq: "waves",
+						skin: "dark",
+						tracksPerArtist: 100,
+						urls: [
+							"https://soundcloud.com/djrajobosmusic"
+						]
+					});
+					ToneDen.player.create({
+						dom: "#playerMini",
+						eq: "waves",
+						skin: "dark",
+						mini:true,
+						tracksPerArtist: 100,
+						urls: [
+							"https://soundcloud.com/djrajobosmusic"
+						]
+					});
+				});
+			</script>
+			<div id="player"></div>
 		</div>
 		<script type="text/javascript" src="js/toneden.loader.js"></script>
 		<script type="text/javascript" src="js/toneden.js"></script>

@@ -6,10 +6,14 @@ $(document).on('pageinit', function() {
 	SC.initialize({
         client_id: client_id
     });
+	//Limpiamos las listas para no duplicarlas
+	$("#tracks-masnuevo").empty();
+	$("#tracks-edits").empty();
+	$("#tracks-sesiones").empty();
 	//Se recuperan los datos de SoundCloud como un JSON
 	$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
 		//Por cada objeto...
-		$(tracks).each(function(index,value) {
+		$(tracks).each(function(index,value) {	
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(value.id);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
@@ -19,7 +23,7 @@ $(document).on('pageinit', function() {
 				//Y se asignan los datos a la plantilla
 				$li.find("img").attr("src",value.artwork_url);
 				$li.find("h2").html(value.title);
-				$li.find("p").html(value.user.username);
+				$li.find("p").html(parseDate(value.created_at));
 				//Se añade el li creado dinamicamente y refrescamos el listview
 				if(index<5) {
 					var $clone = $li.clone();
@@ -47,6 +51,22 @@ $(document).on('pageinit', function() {
 		//	player.play();
 		//});
 	});
+	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
+	$(".ui-footer").find(".next").on("click",function() {
+		ToneDen.player.getInstanceByDom("#player").next();
+	});
+	$(".ui-footer").find(".prev").on("click",function() {
+		ToneDen.player.getInstanceByDom("#player").prev();
+	});
+	$(".ui-footer").find(".play").on("click",function() {
+		if($(this).hasClass("tdicon-play-circle-outline")){
+			$(this).removeClass("tdicon-play-circle-outline").addClass("tdicon-pause-circle-outline");
+			ToneDen.player.getInstanceByDom("#player").togglePause(false);
+		}else {
+			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
+			ToneDen.player.getInstanceByDom("#player").togglePause(true);
+		}
+	});
 });
 
 /* @Author: Mario
@@ -65,4 +85,30 @@ function isEdit(mil){
 	}
 	
     return isEdit;
+}
+
+function parseDate(date) {
+	
+	var fecha = date.split(' ');   //yyyy/mm/dd
+	var fechaParts = fecha[0].split('/');	
+	var mes = "";
+	
+	switch (fechaParts[1])
+	{
+		case "01": mes = "Enero";   break;
+		case "02": mes = "Febrero"; break;
+		case "03": mes = "Marzo";   break;
+		case "04": mes = "Abril";   break;
+		case "05": mes = "Mayo";    break;
+		case "06": mes = "Junio";   break;
+		case "07": mes = "Julio";   break;
+		case "08": mes = "Agosto";  break;
+		case "09": mes = "Septiembre"; break;
+		case "10": mes = "Octubre";    break;
+		case "11": mes = "Noviembre"; break;
+		case "12": mes = "Diciembre"; break;
+	}
+	
+	var fechaBuild = fechaParts[2] + " " + mes + " " + fechaParts[0];
+	return fechaBuild;// Note: months are 0-based
 }
