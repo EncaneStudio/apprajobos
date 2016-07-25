@@ -47,3 +47,27 @@ div[data-role="header"] img {
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
     }
+
+.contenedor1 {
+	margin-bottom:6%;
+	
+	
+}
+	
+.texto1 {
+	margin-right:2px;
+	font-size:0.95em;
+	text-align:justify;
+}
+
+.texto2 {
+	font-style:italic;
+	font-size:0.95em;
+	padding-left:15px;
+}
+
+.foto1 {
+max-width:100%;
+margin-bottom:5px;
+	
+}
