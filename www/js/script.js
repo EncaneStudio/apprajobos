@@ -147,7 +147,7 @@ function parseDate(date) {
 	return fechaBuild;// Note: months are 0-based
 }
 function calcularEdad() {
-    var fecha= "1991-06-09";
+    var fecha= "1989-06-07";
 
         // Si la fecha es correcta, calculamos la edad
         var values=fecha.split("-");
