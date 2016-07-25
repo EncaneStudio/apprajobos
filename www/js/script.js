@@ -1,5 +1,34 @@
 //Al iniciar la página
+
+ToneDenReady = window.ToneDenReady || [];
+ToneDenReady.push(function() {
+	ToneDen.configure({
+		soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+	});
+	// This is where all the action happens:
+	ToneDen.player.create({
+		dom: "#player",
+		eq: "waves",
+		skin: "dark",
+		tracksPerArtist: 100,
+		urls: [
+			"https://soundcloud.com/djrajobosmusic"
+		]
+	});
+	ToneDen.player.create({
+		dom: "#playerMini",
+		eq: "waves",
+		skin: "dark",
+		mini:true,
+		tracksPerArtist: 100,
+		urls: [
+			"https://soundcloud.com/djrajobosmusic"
+		]
+	});
+});
+
 $(document).on('pageinit', function() {
+	calcularEdad();
 	//ID del usuario, ID Cliente y posicion inicial de cada cancion (para más adelante)
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[];
 	//He añadido el SDK de SoundCloud porque si no, no deja hacer stream
@@ -86,6 +115,11 @@ function isEdit(mil){
 	
     return isEdit;
 }
+/*	@Author: Kevin
+	@Description: Parse timesamp date to friendly date
+	@Param Ipunt: Timesamp date
+	@Param Output: Friendly Date
+*/
 
 function parseDate(date) {
 	
@@ -111,4 +145,53 @@ function parseDate(date) {
 	
 	var fechaBuild = fechaParts[2] + " " + mes + " " + fechaParts[0];
 	return fechaBuild;// Note: months are 0-based
+}
+function calcularEdad() {
+    var fecha= "1991-06-09";
+
+        // Si la fecha es correcta, calculamos la edad
+        var values=fecha.split("-");
+        var dia = values[2];
+        var mes = values[1];
+        var ano = values[0];
+
+        // cogemos los valores actuales
+
+        var fecha_hoy = new Date();
+        var ahora_ano = fecha_hoy.getYear();
+        var ahora_mes = fecha_hoy.getMonth()+1;
+        var ahora_dia = fecha_hoy.getDate();
+
+ 
+
+        // realizamos el calculo
+        var edad = (ahora_ano + 1900) - ano;
+        if ( ahora_mes < mes ){
+            edad--;
+        }
+        if ((mes == ahora_mes) && (ahora_dia < dia)){
+            edad--;
+        }
+        if (edad > 1900) {
+            edad -= 1900;
+        }
+        // calculamos los meses
+        var meses=0;
+        if(ahora_mes>mes)
+            meses=ahora_mes-mes;
+        if(ahora_mes<mes)
+            meses=12-(mes-ahora_mes);
+        if(ahora_mes==mes && dia>ahora_dia)
+            meses=11;
+
+        // calculamos los dias
+        var dias=0;
+
+        if(ahora_dia>dia)
+            dias=ahora_dia-dia;
+        if(ahora_dia<dia){
+            ultimoDiaMes=new Date(ahora_ano, ahora_mes, 0);
+			dias=ultimoDiaMes.getDate()-(dia-ahora_dia);
+        }
+        $(".edad").html(edad);
 }
