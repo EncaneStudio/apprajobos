@@ -25,13 +25,35 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
+		<script>
+			function jeje() {
+				MusicControls.create({
+					track       : "Lele",        // optional, default : ''
+					artist      : "Pepito",                       // optional, default : ''
+					cover       : "img/",      // optional, default : nothing
+					// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+					//           or a remote url ('http://...', 'https://...', 'ftp://...')
+					isPlaying   : true,                         // optional, default : true
+					dismissable : true,                         // optional, default : false
+
+					// hide previous/next/close buttons:
+					hasPrev   : false,      // show previous button, optional, default: true
+					hasNext   : false,      // show next button, optional, default: true
+					hasClose  : true,       // show close button, optional, default: false
+
+					// Android only, optional
+					// text displayed in the status bar when the notification (and the ticker) are updated
+					ticker    : 'Now playing "Time is Running Out"'
+				}, onSuccess, onError);
+			}
+		</script>
     </head>
     <body>
         <div class="app">
             <h1>Apache Cordova</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+                <p class="event received" onClick="jeje();">Device is Ready</p>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>

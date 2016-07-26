@@ -69,6 +69,9 @@
         },
         "cordova-plugin-music-controls": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-nowplaying": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {}
