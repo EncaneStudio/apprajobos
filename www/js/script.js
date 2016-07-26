@@ -1,5 +1,3 @@
-//Al iniciar la página
-
 ToneDenReady = window.ToneDenReady || [];
 ToneDenReady.push(function() {
 	ToneDen.configure({
@@ -27,10 +25,12 @@ ToneDenReady.push(function() {
 	});
 });
 
+//Al iniciar la página
 $(document).on('pageinit', function() {
-	calcularEdad();
-	//ID del usuario, ID Cliente y posicion inicial de cada cancion (para más adelante)
-	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[];
+	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
+	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
+	//Calculamos la edad y la pintamos en el sobre mi
+	$(".edad").html(calcularEdad(nacimiento));
 	//He añadido el SDK de SoundCloud porque si no, no deja hacer stream
 	SC.initialize({
         client_id: client_id
@@ -76,6 +76,24 @@ $(document).on('pageinit', function() {
 		//$("#reproductor").find(".coverPlayingNow").attr("src",cover);
 		//$("#reproductor").find(".titlePlayingNow").html(titulo);
 		ToneDen.player.getInstanceByDom("#player").skipTo(id);
+		MusicControls.create({
+			track       : 'Time is Running Out',        // optional, default : ''
+			artist      : 'Muse',                       // optional, default : ''
+			cover       : 'albums/absolution.jpg',      // optional, default : nothing
+			// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+			//           or a remote url ('http://...', 'https://...', 'ftp://...')
+			isPlaying   : true,                         // optional, default : true
+			dismissable : true,                         // optional, default : false
+
+			// hide previous/next/close buttons:
+			hasPrev   : false,      // show previous button, optional, default: true
+			hasNext   : false,      // show next button, optional, default: true
+			hasClose  : true,       // show close button, optional, default: false
+
+			// Android only, optional
+			// text displayed in the status bar when the notification (and the ticker) are updated
+			ticker    : 'Now playing "Time is Running Out"'
+		}, onSuccess, onError);
 		//SC.stream("/tracks/"+canciones[id]).then(function(player){
 		//	player.play();
 		//});
@@ -115,12 +133,12 @@ function isEdit(mil){
 	
     return isEdit;
 }
+
 /*	@Author: Kevin
 	@Description: Parse timesamp date to friendly date
 	@Param Ipunt: Timesamp date
 	@Param Output: Friendly Date
 */
-
 function parseDate(date) {
 	
 	var fecha = date.split(' ');   //yyyy/mm/dd
@@ -146,52 +164,36 @@ function parseDate(date) {
 	var fechaBuild = fechaParts[2] + " " + mes + " " + fechaParts[0];
 	return fechaBuild;// Note: months are 0-based
 }
-function calcularEdad() {
-    var fecha= "1989-06-07";
 
-        // Si la fecha es correcta, calculamos la edad
-        var values=fecha.split("-");
-        var dia = values[2];
-        var mes = values[1];
-        var ano = values[0];
+/*	@Author: Kevin
+	@Description: Calc the age from date
+	@Param Ipunt: Birthday
+	@Param Output: Age
+*/
+function calcularEdad(fecha) {
+	//split date in variables
+	var values=fecha.split("-");
+	var dia = values[2];
+	var mes = values[1];
+	var ano = values[0];
 
-        // cogemos los valores actuales
+	//get actual values
+	var fecha_hoy = new Date();
+	var ahora_ano = fecha_hoy.getYear();
+	var ahora_mes = fecha_hoy.getMonth()+1;
+	var ahora_dia = fecha_hoy.getDate();
 
-        var fecha_hoy = new Date();
-        var ahora_ano = fecha_hoy.getYear();
-        var ahora_mes = fecha_hoy.getMonth()+1;
-        var ahora_dia = fecha_hoy.getDate();
-
- 
-
-        // realizamos el calculo
-        var edad = (ahora_ano + 1900) - ano;
-        if ( ahora_mes < mes ){
-            edad--;
-        }
-        if ((mes == ahora_mes) && (ahora_dia < dia)){
-            edad--;
-        }
-        if (edad > 1900) {
-            edad -= 1900;
-        }
-        // calculamos los meses
-        var meses=0;
-        if(ahora_mes>mes)
-            meses=ahora_mes-mes;
-        if(ahora_mes<mes)
-            meses=12-(mes-ahora_mes);
-        if(ahora_mes==mes && dia>ahora_dia)
-            meses=11;
-
-        // calculamos los dias
-        var dias=0;
-
-        if(ahora_dia>dia)
-            dias=ahora_dia-dia;
-        if(ahora_dia<dia){
-            ultimoDiaMes=new Date(ahora_ano, ahora_mes, 0);
-			dias=ultimoDiaMes.getDate()-(dia-ahora_dia);
-        }
-        $(".edad").html(edad);
+	//do the calc
+	var edad = (ahora_ano + 1900) - ano;
+	if ( ahora_mes < mes ){
+		edad--;
+	}
+	if ((mes == ahora_mes) && (ahora_dia < dia)){
+		edad--;
+	}
+	if (edad > 1900) {
+		edad -= 1900;
+	}
+	//Return age
+	return edad;
 }

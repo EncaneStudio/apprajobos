@@ -6,6 +6,23 @@
     "config_munge": {
         "files": {}
     },
-    "installed_plugins": {},
-    "dependent_plugins": {}
+    "installed_plugins": {
+        "cordova-plugin-music-controls": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
+            "id": "cordova-plugin-music-controls.MusicControls",
+            "pluginId": "cordova-plugin-music-controls",
+            "clobbers": [
+                "MusicControls"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-music-controls": "1.3"
+    }
 }
