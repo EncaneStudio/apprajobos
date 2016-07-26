@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-music-controls": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
+        },
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "com.phonegap.helloworld"
         }
     },
     "dependent_plugins": {},
@@ -20,9 +23,24 @@
             "clobbers": [
                 "MusicControls"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-battery-status/www/battery.js",
+            "id": "cordova-plugin-battery-status.battery",
+            "pluginId": "cordova-plugin-battery-status",
+            "clobbers": [
+                "navigator.battery"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-battery-status/src/browser/BatteryProxy.js",
+            "id": "cordova-plugin-battery-status.Battery",
+            "pluginId": "cordova-plugin-battery-status",
+            "runs": true
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-music-controls": "1.3"
+        "cordova-plugin-music-controls": "1.3",
+        "cordova-plugin-battery-status": "1.1.2"
     }
 }
