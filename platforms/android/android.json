@@ -71,25 +71,25 @@
     },
     "installed_plugins": {
         "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-music-controls": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
-        "cordova-plugin-nowplaying": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+        },
+        "cordova-plugin-nowplaying": {
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         }
     },
     "dependent_plugins": {},
@@ -300,14 +300,6 @@
             ]
         },
         {
-            "id": "cordova-plugin-nowplaying.NowPlaying",
-            "file": "plugins/cordova-plugin-nowplaying/www/NowPlaying.js",
-            "pluginId": "cordova-plugin-nowplaying",
-            "clobbers": [
-                "window.NowPlaying"
-            ]
-        },
-        {
             "id": "cordova-plugin-network-information.network",
             "file": "plugins/cordova-plugin-network-information/www/network.js",
             "pluginId": "cordova-plugin-network-information",
@@ -323,6 +315,14 @@
             "clobbers": [
                 "Connection"
             ]
+        },
+        {
+            "id": "cordova-plugin-nowplaying.NowPlaying",
+            "file": "plugins/cordova-plugin-nowplaying/www/NowPlaying.js",
+            "pluginId": "cordova-plugin-nowplaying",
+            "clobbers": [
+                "window.NowPlaying"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -331,7 +331,7 @@
         "cordova-plugin-file": "4.2.0",
         "cordova-plugin-media": "2.2.0",
         "cordova-plugin-music-controls": "1.3",
-        "cordova-plugin-nowplaying": "1.0.0",
-        "cordova-plugin-network-information": "1.2.1"
+        "cordova-plugin-network-information": "1.2.1",
+        "cordova-plugin-nowplaying": "1.0.0"
     }
 }

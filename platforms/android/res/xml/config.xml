@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.encaneestudio.rajobosapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <feature name="Battery">
         <param name="android-package" value="org.apache.cordova.batterystatus.BatteryListener" />
     </feature>
@@ -16,9 +16,9 @@
     <feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
     </feature>
-    <name>apprajobos</name>
-    <description>Hello World sample application that responds to the deviceready event.</description>
-    <author email="support@phonegap.com" href="http://phonegap.com">PhoneGap Team</author>
+    <name>Apprajobos</name>
+    <description>A tope con la cope.</description>
+    <author email="support@encaneestudio.com" href="http://encaneestudio.com">Encane Team</author>
     <content src="index.html" />
     <icon src="icon.png" />
     <access origin="*" />
@@ -28,6 +28,9 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <gap:config-file parent="/manifest" platform="android">
+        <application android:debuggable="true" />
+    </gap:config-file>
     <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
     <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />

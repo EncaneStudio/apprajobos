@@ -206,14 +206,6 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-plugin-nowplaying.NowPlaying",
-        "file": "plugins/cordova-plugin-nowplaying/www/NowPlaying.js",
-        "pluginId": "cordova-plugin-nowplaying",
-        "clobbers": [
-            "window.NowPlaying"
-        ]
-    },
-    {
         "id": "cordova-plugin-network-information.network",
         "file": "plugins/cordova-plugin-network-information/www/network.js",
         "pluginId": "cordova-plugin-network-information",
@@ -229,6 +221,14 @@ module.exports = [
         "clobbers": [
             "Connection"
         ]
+    },
+    {
+        "id": "cordova-plugin-nowplaying.NowPlaying",
+        "file": "plugins/cordova-plugin-nowplaying/www/NowPlaying.js",
+        "pluginId": "cordova-plugin-nowplaying",
+        "clobbers": [
+            "window.NowPlaying"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -239,8 +239,8 @@ module.exports.metadata =
     "cordova-plugin-file": "4.2.0",
     "cordova-plugin-media": "2.2.0",
     "cordova-plugin-music-controls": "1.3",
-    "cordova-plugin-nowplaying": "1.0.0",
-    "cordova-plugin-network-information": "1.2.1"
+    "cordova-plugin-network-information": "1.2.1",
+    "cordova-plugin-nowplaying": "1.0.0"
 };
 // BOTTOM OF METADATA
 });

@@ -8,27 +8,27 @@
     },
     "installed_plugins": {
         "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-music-controls": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
-        "cordova-plugin-nowplaying": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+        },
+        "cordova-plugin-nowplaying": {
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         }
     }
 }
