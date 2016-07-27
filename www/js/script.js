@@ -1,22 +1,25 @@
-ToneDenReady = window.ToneDenReady || [];
-ToneDenReady.push(function() {
-	ToneDen.configure({
-		soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
-	});
-	// This is where all the action happens:
-	ToneDen.player.create({
-		dom: "#player",
-		eq: "waves",
-		skin: "dark",
-		tracksPerArtist: 100,
-		urls: [
-			"https://soundcloud.com/djrajobosmusic"
-		]
-	});
-});
+document.addEventListener("deviceready", onDeviceReady, false);
 
 //Al iniciar la página
-$(document).on('deviceready', function() {
+function onDeviceReady() {
+	checkConnection();
+	ToneDenReady = window.ToneDenReady || [];
+	ToneDenReady.push(function() {
+		ToneDen.configure({
+			soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+		});
+		// This is where all the action happens:
+		ToneDen.player.create({
+			dom: "#player",
+			eq: "waves",
+			skin: "dark",
+			tracksPerArtist: 100,
+			urls: [
+				"https://soundcloud.com/djrajobosmusic"
+			]
+		});
+	});
+	
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
@@ -104,7 +107,7 @@ $(document).on('deviceready', function() {
 			ToneDen.player.getInstanceByDom("#player").togglePause(true);
 		}
 	});
-});
+}
 
 /* @Author: Mario
    @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)
@@ -186,4 +189,19 @@ function calcularEdad(fecha) {
 	}
 	//Return age
 	return edad;
+}
+
+function checkConnection() {
+	var networkState = navigator.network.connection.type;
+
+	var states = {};
+	states[Connection.UNKNOWN]  = 'Conexión desconocida';
+	states[Connection.ETHERNET] = 'Conexión ethernet';
+	states[Connection.WIFI]     = 'Conexión WiFi';
+	states[Connection.CELL_2G]  = 'Conexión movil 2G';
+	states[Connection.CELL_3G]  = 'Conexión movil 3G';
+	states[Connection.CELL_4G]  = 'Conexión movil 4G';
+	states[Connection.NONE]     = 'Sin conexión';
+
+	alert('Tipo de conexión: ' + states[networkState]);
 }
