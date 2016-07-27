@@ -1,5 +1,5 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.encaneestudio.rajobosapp" version="1.0.0">
-  <name>apprajobos</name>
+  <name>Apprajobos</name>
   <description>A tope con la cope.</description>
   <author href="http://encaneestudio.com" email="support@encaneestudio.com">Encane Team</author>
   <content src="index.html"/>
@@ -92,7 +92,4 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
-  <gap:config-file platform="android" parent="/manifest">
-	<application android:debuggable="true" />
-  </gap:config-file>
 </widget>
