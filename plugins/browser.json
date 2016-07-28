@@ -15,6 +15,9 @@
         },
         "cordova-plugin-media": {
             "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         }
     },
     "dependent_plugins": {

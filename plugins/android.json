@@ -8,21 +8,24 @@
     },
     "installed_plugins": {
         "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         },
         "cordova-plugin-music-controls": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         }
     }
 }
