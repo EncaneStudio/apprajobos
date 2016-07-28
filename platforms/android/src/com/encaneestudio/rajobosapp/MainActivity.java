@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.encaneestudio.apprajobos;
+package com.encaneestudio.rajobosapp;
 
 import android.os.Bundle;
 import org.apache.cordova.*;
