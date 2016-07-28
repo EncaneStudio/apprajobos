@@ -1,4 +1,4 @@
-ToneDenReady = window.ToneDenReady || [];
+/*ToneDenReady = window.ToneDenReady || [];
 ToneDenReady.push(function() {
 	ToneDen.configure({
 		soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
@@ -13,7 +13,7 @@ ToneDenReady.push(function() {
 			"https://soundcloud.com/djrajobosmusic"
 		]
 	});
-});
+});*/
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -58,7 +58,7 @@ function onDeviceReady() {
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
 		
-		ToneDen.player.getInstanceByDom("#playerBIG").skipTo(id);
+		//ToneDen.player.getInstanceByDom("#playerBIG").skipTo(id);
 		MusicControls.create({
 			track       : $(this).find("h2").html(),        // optional, default : ''
 			artist      : $(this).find("p").html(),                       // optional, default : ''
@@ -80,18 +80,18 @@ function onDeviceReady() {
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
-		ToneDen.player.getInstanceByDom("#player").next();
+		//ToneDen.player.getInstanceByDom("#player").next();
 	});
 	$(".ui-footer").find(".prev").on("click",function() {
-		ToneDen.player.getInstanceByDom("#player").prev();
+		//ToneDen.player.getInstanceByDom("#player").prev();
 	});
 	$(".ui-footer").find(".play").on("click",function() {
 		if($(this).hasClass("tdicon-play-circle-outline")){
 			$(this).removeClass("tdicon-play-circle-outline").addClass("tdicon-pause-circle-outline");
-			ToneDen.player.getInstanceByDom("#player").togglePause(false);
+			//ToneDen.player.getInstanceByDom("#player").togglePause(false);
 		}else {
 			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
-			ToneDen.player.getInstanceByDom("#player").togglePause(true);
+			//ToneDen.player.getInstanceByDom("#player").togglePause(true);
 		}
 	});
 }
