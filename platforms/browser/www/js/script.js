@@ -1,9 +1,4 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-
-//Al iniciar la página
-function onDeviceReady() {
-	checkConnection();
-	ToneDenReady = window.ToneDenReady || [];
+ToneDenReady = window.ToneDenReady || [];
 	ToneDenReady.push(function() {
 		ToneDen.configure({
 			soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
@@ -19,15 +14,14 @@ function onDeviceReady() {
 			]
 		});
 	});
-	
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
 	$(".edad").html(calcularEdad(nacimiento));
-	//He añadido el SDK de SoundCloud porque si no, no deja hacer stream
-	SC.initialize({
-        client_id: client_id
-    });
 	//Limpiamos las listas para no duplicarlas
 	$("#tracks-masnuevo").empty();
 	$("#tracks-edits").empty();
@@ -63,12 +57,8 @@ function onDeviceReady() {
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
-		//var cover = $(this).find("img").attr("src");
-		//var titulo = $(this).find("h2").html();
 		
-		//$("#reproductor").find(".coverPlayingNow").attr("src",cover);
-		//$("#reproductor").find(".titlePlayingNow").html(titulo);
-		ToneDen.player.getInstanceByDom("#player").skipTo(id);
+		ToneDen.player.getInstanceByDom("#playerBIG").skipTo(id);
 		MusicControls.create({
 			track       : $(this).find("h2").html(),        // optional, default : ''
 			artist      : $(this).find("p").html(),                       // optional, default : ''
@@ -79,17 +69,14 @@ function onDeviceReady() {
 			dismissable : true,                         // optional, default : false
 
 			// hide previous/next/close buttons:
-			hasPrev   : false,      // show previous button, optional, default: true
-			hasNext   : false,      // show next button, optional, default: true
+			hasPrev   : true,      // show previous button, optional, default: true
+			hasNext   : true,      // show next button, optional, default: true
 			hasClose  : true,       // show close button, optional, default: false
 
 			// Android only, optional
 			// text displayed in the status bar when the notification (and the ticker) are updated
-			ticker    : 'Now playing "Time is Running Out"'
+			ticker    : 'Está sonanado cacota'
 		});
-		//SC.stream("/tracks/"+canciones[id]).then(function(player){
-		//	player.play();
-		//});
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
@@ -191,6 +178,11 @@ function calcularEdad(fecha) {
 	return edad;
 }
 
+/*	@Author: Kevin
+	@Description: Check connection type of device
+	@Param Ipunt: None
+	@Param Output: Alert with connection type
+*/
 function checkConnection() {
 	var networkState = navigator.network.connection.type;
 
