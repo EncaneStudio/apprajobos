@@ -7,19 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
-        },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
-        },
         "cordova-plugin-music-controls": {
             "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         },
-        "cordova-plugin-nowplaying": {
+        "cordova-plugin-media": {
             "PACKAGE_NAME": "com.encaneestudio.rajobosapp"
         }
     },

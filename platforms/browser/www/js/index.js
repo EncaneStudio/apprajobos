@@ -34,16 +34,25 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+	console.log(MusicControls.create({
+    track       : 'Time is Running Out',        // optional, default : ''
+    artist      : 'Muse',                       // optional, default : ''
+    cover       : 'albums/absolution.jpg',      // optional, default : nothing
+    // cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+    //           or a remote url ('http://...', 'https://...', 'ftp://...')
+    isPlaying   : true,                         // optional, default : true
+    dismissable : true,                         // optional, default : false
+
+    // hide previous/next/close buttons:
+    hasPrev   : false,      // show previous button, optional, default: true
+    hasNext   : false,      // show next button, optional, default: true
+    hasClose  : true,       // show close button, optional, default: false
+
+    // Android only, optional
+    // text displayed in the status bar when the notification (and the ticker) are updated
+    ticker    : 'Now playing "Time is Running Out"'
+}, onSuccess, onError));
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
+    receivedEvent: function(id) {}
 };

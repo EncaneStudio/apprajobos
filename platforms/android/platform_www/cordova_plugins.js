@@ -1,11 +1,28 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-battery-status.battery",
-        "file": "plugins/cordova-plugin-battery-status/www/battery.js",
-        "pluginId": "cordova-plugin-battery-status",
+        "id": "cordova-plugin-music-controls.MusicControls",
+        "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
+        "pluginId": "cordova-plugin-music-controls",
         "clobbers": [
-            "navigator.battery"
+            "MusicControls"
+        ]
+    },
+    {
+        "id": "cordova-plugin-network-information.network",
+        "file": "plugins/cordova-plugin-network-information/www/network.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "navigator.connection",
+            "navigator.network.connection"
+        ]
+    },
+    {
+        "id": "cordova-plugin-network-information.Connection",
+        "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+        "pluginId": "cordova-plugin-network-information",
+        "clobbers": [
+            "Connection"
         ]
     },
     {
@@ -196,51 +213,16 @@ module.exports = [
         "clobbers": [
             "window.Media"
         ]
-    },
-    {
-        "id": "cordova-plugin-music-controls.MusicControls",
-        "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
-        "pluginId": "cordova-plugin-music-controls",
-        "clobbers": [
-            "MusicControls"
-        ]
-    },
-    {
-        "id": "cordova-plugin-network-information.network",
-        "file": "plugins/cordova-plugin-network-information/www/network.js",
-        "pluginId": "cordova-plugin-network-information",
-        "clobbers": [
-            "navigator.connection",
-            "navigator.network.connection"
-        ]
-    },
-    {
-        "id": "cordova-plugin-network-information.Connection",
-        "file": "plugins/cordova-plugin-network-information/www/Connection.js",
-        "pluginId": "cordova-plugin-network-information",
-        "clobbers": [
-            "Connection"
-        ]
-    },
-    {
-        "id": "cordova-plugin-nowplaying.NowPlaying",
-        "file": "plugins/cordova-plugin-nowplaying/www/NowPlaying.js",
-        "pluginId": "cordova-plugin-nowplaying",
-        "clobbers": [
-            "window.NowPlaying"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-battery-status": "1.1.2",
-    "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-file": "4.2.0",
-    "cordova-plugin-media": "2.2.0",
     "cordova-plugin-music-controls": "1.3",
     "cordova-plugin-network-information": "1.2.1",
-    "cordova-plugin-nowplaying": "1.0.0"
+    "cordova-plugin-compat": "1.0.0",
+    "cordova-plugin-file": "4.2.0",
+    "cordova-plugin-media": "2.2.0"
 };
 // BOTTOM OF METADATA
 });
