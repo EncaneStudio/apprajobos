@@ -1,4 +1,5 @@
-cordova.define("cordova-plugin-music-controls.MusicControls", function(require, exports, module) { module.exports = {
+cordova.define("cordova-plugin-music-controls.MusicControls", function(require, exports, module) {
+module.exports = {
   updateCallback: function () {},
   
   create: function (data, successCallback, errorCallback) {

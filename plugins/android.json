@@ -7,12 +7,6 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
-        },
         "cordova-plugin-media": {
             "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         },
@@ -26,5 +20,12 @@
             "PACKAGE_NAME": "com.encaneestudio.apprajobos"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.encaneestudio.apprajobos"
+        }
+    }
 }
