@@ -18,6 +18,24 @@ ToneDenReady.push(function() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+	MusicControls.create({
+			track       : "Hola",        // optional, default : ''
+			artist      : "que tal",                       // optional, default : ''
+			cover       : "img/logo.png",      // optional, default : nothing
+			// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+			//           or a remote url ('http://...', 'https://...', 'ftp://...')
+			isPlaying   : true,                         // optional, default : true
+			dismissable : true,                         // optional, default : false
+
+			// hide previous/next/close buttons:
+			hasPrev   : true,      // show previous button, optional, default: true
+			hasNext   : true,      // show next button, optional, default: true
+			hasClose  : true,       // show close button, optional, default: false
+
+			// Android only, optional
+			// text displayed in the status bar when the notification (and the ticker) are updated
+			ticker    : 'Está sonanado cacota'
+		});
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
@@ -27,7 +45,7 @@ function onDeviceReady() {
 	$("#tracks-edits").empty();
 	$("#tracks-sesiones").empty();
 	//Se recuperan los datos de SoundCloud como un JSON
-	$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
+	/*$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
 		//Por cada objeto...
 		$(tracks).each(function(index,value) {	
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
@@ -52,7 +70,7 @@ function onDeviceReady() {
 				}	
 			});
 		});
-	});
+	});*/
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
