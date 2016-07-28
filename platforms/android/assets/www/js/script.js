@@ -1,19 +1,19 @@
 ToneDenReady = window.ToneDenReady || [];
-	ToneDenReady.push(function() {
-		ToneDen.configure({
-			soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
-		});
-		// This is where all the action happens:
-		ToneDen.player.create({
-			dom: "#player",
-			eq: "waves",
-			skin: "dark",
-			tracksPerArtist: 100,
-			urls: [
-				"https://soundcloud.com/djrajobosmusic"
-			]
-		});
+ToneDenReady.push(function() {
+	ToneDen.configure({
+		soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
 	});
+	// This is where all the action happens:
+	ToneDen.player.create({
+		dom: "#player",
+		eq: "waves",
+		skin: "dark",
+		tracksPerArtist: 100,
+		urls: [
+			"https://soundcloud.com/djrajobosmusic"
+		]
+	});
+});
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
