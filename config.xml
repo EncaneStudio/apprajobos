@@ -5,8 +5,10 @@
   <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
-  <plugin name="cordova-plugin-media" source="npm" spec="~2.2.0"/>
-  <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0"/>
+  <plugin name="cordova-plugin-media" spec="2.2.0" />
+  <plugin name="cordova-plugin-network-information" spec="1.2.1" />
+  <plugin name="com.rd11.remote-controls" spec="1.0.1" />
+
   <icon src="icon.png"/>
   <platform name="android">
     <icon src="www/res/icon/android/drawable-ldpi-icon.png" density="ldpi"/>
