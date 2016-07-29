@@ -7,8 +7,8 @@
   <preference name="android-minSdkVersion" value="14"/>
   <plugin name="cordova-plugin-media" spec="2.2.0" />
   <plugin name="cordova-plugin-network-information" spec="1.2.1" />
+  <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
-  <uses-permission android:name="android.permission.INTERNET" />
 
   <icon src="icon.png"/>
   <platform name="android">
