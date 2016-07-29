@@ -18,6 +18,7 @@ ToneDenReady.push(function() {
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
+	checkConnection();
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
@@ -80,18 +81,18 @@ function onDeviceReady() {
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
-		//ToneDen.player.getInstanceByDom("#player").next();
+		ToneDen.player.getInstanceByDom("#player").next();
 	});
 	$(".ui-footer").find(".prev").on("click",function() {
-		//ToneDen.player.getInstanceByDom("#player").prev();
+		ToneDen.player.getInstanceByDom("#player").prev();
 	});
 	$(".ui-footer").find(".play").on("click",function() {
 		if($(this).hasClass("tdicon-play-circle-outline")){
 			$(this).removeClass("tdicon-play-circle-outline").addClass("tdicon-pause-circle-outline");
-			//ToneDen.player.getInstanceByDom("#player").togglePause(false);
+			ToneDen.player.getInstanceByDom("#player").togglePause(false);
 		}else {
 			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
-			//ToneDen.player.getInstanceByDom("#player").togglePause(true);
+			ToneDen.player.getInstanceByDom("#player").togglePause(true);
 		}
 	});	 
 	// Register callback 
@@ -207,16 +208,16 @@ function checkConnection() {
 function events(action) {
 	switch(action) {
 		case 'music-controls-next':
-			// Do something 
+			ToneDen.player.getInstanceByDom("#player").next();
 			break;
 		case 'music-controls-previous':
-			// Do something 
+			ToneDen.player.getInstanceByDom("#player").prev();
 			break;
 		case 'music-controls-pause':
-			// Do something 
+			ToneDen.player.getInstanceByDom("#player").togglePause(true);
 			break;
 		case 'music-controls-play':
-			// Do something 
+			ToneDen.player.getInstanceByDom("#player").togglePause(false);
 			break;
 		case 'music-controls-destroy':
 			// Do something 
