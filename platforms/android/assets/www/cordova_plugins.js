@@ -207,11 +207,11 @@ module.exports = [
         "runs": true
     },
     {
-        "id": "cordova-plugin-music-controls.MusicControls",
-        "file": "plugins/cordova-plugin-music-controls/www/MusicControls.js",
-        "pluginId": "cordova-plugin-music-controls",
+        "id": "com.rd11.remote-controls.RemoteControls",
+        "file": "plugins/com.rd11.remote-controls/www/RemoteControls.js",
+        "pluginId": "com.rd11.remote-controls",
         "clobbers": [
-            "MusicControls"
+            "window.remoteControls"
         ]
     }
 ];
@@ -223,7 +223,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.2.0",
-    "cordova-plugin-music-controls": "1.3"
+    "com.rd11.remote-controls": "1.0.1"
 };
 // BOTTOM OF METADATA
 });

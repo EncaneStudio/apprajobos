@@ -45,7 +45,7 @@ function onDeviceReady() {
 	$("#tracks-edits").empty();
 	$("#tracks-sesiones").empty();
 	//Se recuperan los datos de SoundCloud como un JSON
-	/*$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
+	$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
 		//Por cada objeto...
 		$(tracks).each(function(index,value) {	
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
@@ -70,7 +70,7 @@ function onDeviceReady() {
 				}	
 			});
 		});
-	});*/
+	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {

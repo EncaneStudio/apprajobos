@@ -39,10 +39,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-music-controls": {
+    "com.rd11.remote-controls": {
         "source": {
             "type": "git",
-            "url": "https://github.com/homerours/cordova-music-controls-plugin",
+            "url": "https://github.com/shi11/RemoteControls",
             "subdir": "."
         },
         "is_top_level": true,
