@@ -1,24 +1,22 @@
-ToneDenReady = window.ToneDenReady || [];
-ToneDenReady.push(function() {
-	ToneDen.configure({
-		soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
-	});
-	// This is where all the action happens:
-	ToneDen.player.create({
-		dom: "#player",
-		eq: "waves",
-		skin: "dark",
-		tracksPerArtist: 100,
-		urls: [
-			"https://soundcloud.com/djrajobosmusic"
-		]
-	});
-});
-
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-	checkConnection();
+	ToneDenReady = window.ToneDenReady || [];
+	ToneDenReady.push(function() {
+		ToneDen.configure({
+			soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
+		});
+		// This is where all the action happens:
+		ToneDen.player.create({
+			dom: "#player",
+			eq: "waves",
+			skin: "dark",
+			tracksPerArtist: 100,
+			urls: [
+				"https://soundcloud.com/djrajobosmusic"
+			]
+		});
+	});
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
@@ -59,7 +57,7 @@ function onDeviceReady() {
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
 		
-		ToneDen.player.getInstanceByDom("#playerBIG").skipTo(id);
+		ToneDen.player.getInstanceByDom("#player").skipTo(id);
 		MusicControls.destroy();
 		MusicControls.create({
 			track       : $(this).find("h2").html(),        // optional, default : ''
