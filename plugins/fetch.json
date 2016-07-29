@@ -38,14 +38,5 @@
         },
         "is_top_level": true,
         "variables": {}
-    },
-    "cordova-plugin-music-controls": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/homerours/cordova-music-controls-plugin",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
     }
 }
