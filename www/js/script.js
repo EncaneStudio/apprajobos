@@ -111,7 +111,13 @@ function onDeviceReady() {
 			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
 			//ToneDen.player.getInstanceByDom("#player").togglePause(true);
 		}
-	});
+	});	 
+	// Register callback 
+	MusicControls.subscribe(events);
+	 
+	// Start listening for events 
+	// The plugin will run the events function each time an event is fired 
+	MusicControls.listen();
 }
 
 /* @Author: Mario
@@ -214,4 +220,37 @@ function checkConnection() {
 	states[Connection.NONE]     = 'Sin conexión';
 
 	alert('Tipo de conexión: ' + states[networkState]);
+}
+
+function events(action) {
+	switch(action) {
+		case 'music-controls-next':
+			// Do something 
+			break;
+		case 'music-controls-previous':
+			// Do something 
+			break;
+		case 'music-controls-pause':
+			// Do something 
+			break;
+		case 'music-controls-play':
+			// Do something 
+			break;
+		case 'music-controls-destroy':
+			// Do something 
+			break;
+ 
+		// Headset events (Android only) 
+		case 'music-controls-media-button' :
+			// Do something 
+			break;
+		case 'music-controls-headset-unplugged':
+			// Do something 
+			break;
+		case 'music-controls-headset-plugged':
+			// Do something 
+			break;
+		default:
+			break;
+	}
 }
