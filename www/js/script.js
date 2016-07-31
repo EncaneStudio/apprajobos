@@ -206,11 +206,11 @@ function events(action) {
 			MusicControls.updateIsPlaying(false);
 			break;
 		case 'music-controls-play':
-			Amplitude.play();
+			Amplitude.play(true);
 			MusicControls.updateIsPlaying(true);
 			break;
 		case 'music-controls-destroy':
-			// Do something 
+			navigator.app.exitApp();
 			break;
  
 		// Headset events (Android only) 
@@ -240,10 +240,11 @@ function changeMusicControl() {
 		// hide previous/next/close buttons:
 		hasPrev   : true,      // show previous button, optional, default: true
 		hasNext   : true,      // show next button, optional, default: true
+		hasClose  : true,
 
 		// Android only, optional
 		// text displayed in the status bar when the notification (and the ticker) are updated
-		ticker    : 'Está sonanado: '+ song.name
+		ticker    : song.name
 	});
 }
 

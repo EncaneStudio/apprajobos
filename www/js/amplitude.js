@@ -3451,7 +3451,7 @@ var Amplitude = (function () {
 		Plays the active song. If the current song is live, it reconnects
 		the stream before playing.
 	--------------------------------------------------------------------------*/
-	function privatePlay(){
+	function privatePlay(publica=false){
 		privateRunCallback('before_play');
 
 		if( config.active_metadata.live ){
@@ -3471,6 +3471,9 @@ var Amplitude = (function () {
 
 		config.active_song.play();
 		config.active_song.playbackRate = config.playback_speed;
+		
+		if(publica==true)
+			privateChangePlayPauseState("playing");
 		
 		privateRunCallback('after_play');
 	}
