@@ -52,9 +52,9 @@ $(document).ready(function() {
 					"default_album_art": "images/no-cover-large.png",
 					"debug":true,
 					"callbacks":{
-						"after_play":"changeMusicControl";
-						"after_next":"changeMusicControl";
-						"after_prev":"changeMusicControl";
+						"after_play":"changeMusicControl",
+						"after_next":"changeMusicControl",
+						"after_prev":"changeMusicControl"
 						
 					}
 				});
