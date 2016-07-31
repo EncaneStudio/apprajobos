@@ -210,7 +210,7 @@ function events(action) {
 			MusicControls.updateIsPlaying(false);
 			break;
 		case 'music-controls-play':
-			Amplitude.play(true);
+			Amplitude.play();
 			MusicControls.updateIsPlaying(true);
 			break;
 		case 'music-controls-destroy':
