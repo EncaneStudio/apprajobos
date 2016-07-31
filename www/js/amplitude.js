@@ -3560,7 +3560,7 @@ var Amplitude = (function () {
 		getActiveSongMetadata: publicGetActiveSongMetadata,
 		getSongByIndex: publicGetSongByIndex,
 		playNow: publicPlayNow,
-		play: publicPlay,
+		play: privatePlay,
 		pause: publicPause,
 		registerVisualization: publicRegisterVisualization,
 		visualizationCapable: publicVisualizationCapable,
