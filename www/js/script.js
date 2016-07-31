@@ -19,6 +19,7 @@ $(document).ready(function() {
 			var infotrack = {
 				"name": value.title,
 				"artist": "DJ Rajobos",
+				"album": "DJ Rajobos",
 				"url": value.permalink_url,
 				"cover_art_url": replaceArtworkSize(value.artwork_url,"t500x500")
 			};

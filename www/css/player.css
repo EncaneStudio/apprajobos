@@ -12,7 +12,6 @@ div#top-header{
     background-color: #f2f2f2;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    width: 370px;
     height: 40px;
     margin: auto;
     text-align: center;
@@ -45,7 +44,6 @@ img#large-album-art{
 	Small Player
 */
 div#small-player{
-	width: 370px;
 	height: 45px;
 	background-color: #f2f2f2;
 	border-radius: 5px;
@@ -182,7 +180,7 @@ div#small-player-full-bottom-controls{
 div#small-player-full-bottom-info{
     margin: auto;
     margin-top: -7px;
-    width: 350px;
+    width:375px;
     clear: both;
 }
 div#small-player-full-bottom-info span.current-time{
@@ -320,7 +318,6 @@ div.now-playing-title{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
     font-weight: 300;
     font-size: 12px;
-    color: #676261;
     line-height: 14px;
 }
 div.album-information{
