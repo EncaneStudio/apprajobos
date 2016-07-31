@@ -54,7 +54,8 @@ $(document).ready(function() {
 					"callbacks":{
 						"after_play":"changeMusicControl",
 						"after_next":"changeMusicControl",
-						"after_prev":"changeMusicControl"
+						"after_prev":"changeMusicControl",
+						"before_pause":"tooglePausedMusicControl"
 						
 					}
 				});
@@ -256,4 +257,8 @@ function replaceArtworkSize(url,size) {
 	var string = String(url);
 	var cambiado = string.replace("large",String(size));
 	return cambiado;
+}
+
+function tooglePausedMusicControl() {
+	MusicControls.updateIsPlaying(false);
 }

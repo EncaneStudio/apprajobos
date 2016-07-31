@@ -3479,6 +3479,7 @@ var Amplitude = (function () {
 		Pauses the active song. If it's live, it disconnects the stream.
 	--------------------------------------------------------------------------*/
 	function privatePause(){
+		privateRunCallback('before_pause');
 		config.active_song.pause();
 		
 		/*
@@ -3489,6 +3490,7 @@ var Amplitude = (function () {
 		if( config.active_metadata.live ){
 			privateDisconnectStream();
 		}
+		privateRunCallback('after_pause');
 	}
 
 	/*--------------------------------------------------------------------------
