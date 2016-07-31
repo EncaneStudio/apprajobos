@@ -3566,6 +3566,8 @@ var Amplitude = (function () {
 		addSong: publicAddSong,
 		analyser: publicGetAnalyser,
 		active: config.active_song,
-		playIndex: privatePlayIndex
+		playIndex: privatePlayIndex,
+		prev: privatePrevClickHandle,
+		next: privateNextClickHandle
 	};
 })();

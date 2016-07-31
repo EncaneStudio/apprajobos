@@ -50,7 +50,13 @@ $(document).ready(function() {
 					"songs":canciones,
 					"soundcloud_client": '7f4a6ed1488c1ebdf31600767b9b6350',
 					"default_album_art": "images/no-cover-large.png",
-					"debug":true
+					"debug":true,
+					"callbacks":{
+						"after_play":"changeMusicControl";
+						"after_next":"changeMusicControl";
+						"after_prev":"changeMusicControl";
+						
+					}
 				});
 			}
 		});
@@ -60,25 +66,6 @@ $(document).ready(function() {
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
 		//Amplitude.playIndex(parseInt($(this).attr("amplitude-song-index")));
-
-		MusicControls.destroy();
-		MusicControls.create({
-			track       : $(this).find("h2").html(),        // optional, default : ''
-			artist      : $(this).find("p").html(),                       // optional, default : ''
-			cover       : $(this).find("img").attr("src"),      // optional, default : nothing
-			// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
-			//           or a remote url ('http://...', 'https://...', 'ftp://...')
-			isPlaying   : true,                         // optional, default : true
-			dismissable : true,                         // optional, default : false
-
-			// hide previous/next/close buttons:
-			hasPrev   : true,      // show previous button, optional, default: true
-			hasNext   : true,      // show next button, optional, default: true
-
-			// Android only, optional
-			// text displayed in the status bar when the notification (and the ticker) are updated
-			ticker    : 'Está sonanado: '+ $(this).find("h2").html()
-		});
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
@@ -97,11 +84,11 @@ $(document).ready(function() {
 		}
 	});	 
 	// Register callback 
-	//MusicControls.subscribe(events);
+	MusicControls.subscribe(events);
 	 
 	// Start listening for events 
 	// The plugin will run the events function each time an event is fired 
-	//MusicControls.listen();
+	MusicControls.listen();
 });
 /* @Author: Mario
    @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)
@@ -208,16 +195,16 @@ function checkConnection() {
 function events(action) {
 	switch(action) {
 		case 'music-controls-next':
-			ToneDen.player.getInstanceByDom("#player").next();
+			Amplitude.next();
 			break;
 		case 'music-controls-previous':
-			ToneDen.player.getInstanceByDom("#player").prev();
+			Amplitude.prev();
 			break;
 		case 'music-controls-pause':
-			ToneDen.player.getInstanceByDom("#player").togglePause(true);
+			Amplitude.pause();
 			break;
 		case 'music-controls-play':
-			ToneDen.player.getInstanceByDom("#player").togglePause(false);
+			Amplitude.play();
 			break;
 		case 'music-controls-destroy':
 			// Do something 
@@ -236,4 +223,26 @@ function events(action) {
 		default:
 			break;
 	}
+}
+
+function changeMusicControl() {
+	var song = Amplitude.getActiveSongMetadata();
+	
+	MusicControls.destroy();
+	MusicControls.create({
+		track       : song.title,        // optional, default : ''
+		cover       : song.cover_url,      // optional, default : nothing
+		// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
+		//           or a remote url ('http://...', 'https://...', 'ftp://...')
+		isPlaying   : true,                         // optional, default : true
+		dismissable : true,                         // optional, default : false
+
+		// hide previous/next/close buttons:
+		hasPrev   : true,      // show previous button, optional, default: true
+		hasNext   : true,      // show next button, optional, default: true
+
+		// Android only, optional
+		// text displayed in the status bar when the notification (and the ticker) are updated
+		ticker    : 'Está sonanado: '+ $(this).find("h2").html()
+	});
 }
