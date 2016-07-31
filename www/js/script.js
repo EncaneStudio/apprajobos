@@ -33,7 +33,7 @@ $(document).ready(function() {
 				$li.find("img").attr("src",value.artwork_url);
 				$li.find("h2").html(value.title);
 				$li.find("p").html(parseDate(value.created_at));
-				$li.find("a").attr("amplitude-song-index",index+1);
+				$li.find("a").attr("amplitude-song-index",index);
 				//Se añade el li creado dinamicamente y refrescamos el listview
 				if(index<5) {
 					var $clone = $li.clone();
@@ -242,7 +242,7 @@ function changeMusicControl() {
 
 		// Android only, optional
 		// text displayed in the status bar when the notification (and the ticker) are updated
-		ticker    : 'Está sonanado: '+ $(this).find("h2").html()
+		ticker    : 'Está sonanado: '+ song.name
 	});
 }
 
