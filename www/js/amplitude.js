@@ -3075,7 +3075,7 @@ var Amplitude = (function () {
 		/*
 			URL to the remote soundcloud SDK
 		*/
-		script.src = 'https://connect.soundcloud.com/sdk.js';
+		script.src = 'js/soundcloud.js';
 		script.onreadystatechange = privateInitSoundcloud;
 		script.onload = privateInitSoundcloud;
 
