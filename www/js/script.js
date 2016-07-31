@@ -228,12 +228,9 @@ function events(action) {
 function changeMusicControl() {
 	var song = Amplitude.getActiveSongMetadata();
 	
-	MusicControls.destroy();
 	MusicControls.create({
-		track       : song.title,        // optional, default : ''
-		cover       : song.cover_url,      // optional, default : nothing
-		// cover can be a local path (use fullpath 'file:///storage/emulated/...', or only 'my_image.jpg' if my_image.jpg is in the www folder of your app)
-		//           or a remote url ('http://...', 'https://...', 'ftp://...')
+		track       : song.name,        // optional, default : ''
+		cover       : song.cover_art_url,      // optional, default : nothing
 		isPlaying   : true,                         // optional, default : true
 		dismissable : true,                         // optional, default : false
 
