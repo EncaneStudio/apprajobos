@@ -1,22 +1,8 @@
-document.addEventListener("deviceready", onDeviceReady, false);
+//document.addEventListener("deviceready", onDeviceReady, false);
 
-function onDeviceReady() {
-	ToneDenReady = window.ToneDenReady || [];
-	ToneDenReady.push(function() {
-		ToneDen.configure({
-			soundcloudConsumerKey: 'f36abe5e283bc2059b1f55507af890eb'
-		});
-		// This is where all the action happens:
-		ToneDen.player.create({
-			dom: "#player",
-			eq: "waves",
-			skin: "dark",
-			tracksPerArtist: 100,
-			urls: [
-				"https://soundcloud.com/djrajobosmusic"
-			]
-		});
-	});
+//function onDeviceReady() {
+$(document).ready(function() {
+	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
 	//Calculamos la edad y la pintamos en el sobre mi
@@ -28,9 +14,17 @@ function onDeviceReady() {
 	//Se recuperan los datos de SoundCloud como un JSON
 	$.getJSON("http://api.soundcloud.com/tracks/?client_id="+client_id+"&user_id="+id, function(tracks) {
 		//Por cada objeto...
-		$(tracks).each(function(index,value) {	
+		var count = tracks.length;
+		$(tracks).each(function(index,value) {
+			$("#small-player-playlist").append('<div class="amplitude-song-container amplitude-play-pause playlist-item" amplitude-song-index="'+index+'"><img src="'+value.artwork_url+'" class="album-art"/>/<div class="playlist-meta"><div class="now-playing-title">'+value.title+'</div><div class="album-information">DJ Rajobos</span></div></div><div style="clear: both;"></div></div>')
+			var infotrack = {
+				"name": value.title,
+				"artist": "DJ Rajobos",
+				"url": value.permalink_url,
+				"cover_art_url": value.artwork_url
+			};
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
-			canciones.push(value.id);
+			canciones.push(infotrack);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
 			var $li = $("<li>", { "class": "track", "data-position":index });
 			//Cargamos la plantilla track.html...
@@ -39,6 +33,7 @@ function onDeviceReady() {
 				$li.find("img").attr("src",value.artwork_url);
 				$li.find("h2").html(value.title);
 				$li.find("p").html(parseDate(value.created_at));
+				$li.find("a").attr("amplitude-song-index",index+1);
 				//Se añade el li creado dinamicamente y refrescamos el listview
 				if(index<5) {
 					var $clone = $li.clone();
@@ -50,14 +45,22 @@ function onDeviceReady() {
 					$("#tracks-sesiones").append($li).listview("refresh");
 				}	
 			});
+			if (!--count) {
+				Amplitude.init({
+					"songs":canciones,
+					"soundcloud_client": '7f4a6ed1488c1ebdf31600767b9b6350',
+					"default_album_art": "images/no-cover-large.png",
+					"debug":true
+				});
+			}
 		});
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
 		var id = $(this).attr("data-position");
-		
-		ToneDen.player.getInstanceByDom("#player").skipTo(id);
+		Amplitude.playIndex(parseInt($(this).attr("amplitude-song-index")));
+
 		MusicControls.destroy();
 		MusicControls.create({
 			track       : $(this).find("h2").html(),        // optional, default : ''
@@ -79,28 +82,27 @@ function onDeviceReady() {
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
-		ToneDen.player.getInstanceByDom("#player").next();
+		//ToneDen.player.getInstanceByDom("#player").next();
 	});
 	$(".ui-footer").find(".prev").on("click",function() {
-		ToneDen.player.getInstanceByDom("#player").prev();
+		//ToneDen.player.getInstanceByDom("#player").prev();
 	});
 	$(".ui-footer").find(".play").on("click",function() {
 		if($(this).hasClass("tdicon-play-circle-outline")){
 			$(this).removeClass("tdicon-play-circle-outline").addClass("tdicon-pause-circle-outline");
-			ToneDen.player.getInstanceByDom("#player").togglePause(false);
+			//ToneDen.player.getInstanceByDom("#player").togglePause(false);
 		}else {
 			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
-			ToneDen.player.getInstanceByDom("#player").togglePause(true);
+			//ToneDen.player.getInstanceByDom("#player").togglePause(true);
 		}
 	});	 
 	// Register callback 
-	MusicControls.subscribe(events);
+	//MusicControls.subscribe(events);
 	 
 	// Start listening for events 
 	// The plugin will run the events function each time an event is fired 
-	MusicControls.listen();
-}
-
+	//MusicControls.listen();
+});
 /* @Author: Mario
    @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)
    @Param Input: Duration audio in milliseconds
