@@ -16,12 +16,11 @@ $(document).ready(function() {
 		//Por cada objeto...
 		var count = tracks.length;
 		$(tracks).each(function(index,value) {
-			$("#small-player-playlist").append('<div class="amplitude-song-container amplitude-play-pause playlist-item" amplitude-song-index="'+index+'"><img src="'+value.artwork_url+'" class="album-art"/>/<div class="playlist-meta"><div class="now-playing-title">'+value.title+'</div><div class="album-information">DJ Rajobos</span></div></div><div style="clear: both;"></div></div>')
 			var infotrack = {
 				"name": value.title,
 				"artist": "DJ Rajobos",
 				"url": value.permalink_url,
-				"cover_art_url": value.artwork_url
+				"cover_art_url": replaceArtworkSize(value.artwork_url,"t500x500")
 			};
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(infotrack);
@@ -202,9 +201,11 @@ function events(action) {
 			break;
 		case 'music-controls-pause':
 			Amplitude.pause();
+			MusicControls.updateIsPlaying(false);
 			break;
 		case 'music-controls-play':
 			Amplitude.play();
+			MusicControls.updateIsPlaying(true);
 			break;
 		case 'music-controls-destroy':
 			// Do something 
@@ -242,4 +243,10 @@ function changeMusicControl() {
 		// text displayed in the status bar when the notification (and the ticker) are updated
 		ticker    : 'Está sonanado: '+ $(this).find("h2").html()
 	});
+}
+
+function replaceArtworkSize(url,size) {
+	var string = String(url);
+	var cambiado = string.replace("large",String(size));
+	return cambiado;
 }
