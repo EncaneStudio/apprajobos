@@ -45,7 +45,7 @@ img#large-album-art{
 */
 div#small-player{
 	height: 20%;
-	background-color: #f2f2f2;
+	background-color: #2B2D2D;
     margin: auto;
     z-index: 99999;
 	border:0px!important;
@@ -292,7 +292,7 @@ div#song-time-visualization{
     background-color: #bebebe;
 }
 div#song-time-visualization div.amplitude-song-time-visualization-status{
-    background-color: #676261;
+    background-color: #3388CC;
     height: 5px;
 }
 
@@ -305,7 +305,7 @@ div#song-time-visualization-large{
     float: left;
 }
 div#song-time-visualization-large div.amplitude-song-time-visualization-status{
-    background-color: #676261;
+    background-color: #3388CC;
     height: 5px;
 }
 

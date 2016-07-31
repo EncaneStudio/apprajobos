@@ -65,10 +65,6 @@ $(document).ready(function() {
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
-		cordova.plugins.backgroundMode.configure({
-			silent: true
-		});
-		cordova.plugins.backgroundMode.enable();
 		var id = $(this).attr("data-position");
 		//Amplitude.playIndex(parseInt($(this).attr("amplitude-song-index")));
 	});
