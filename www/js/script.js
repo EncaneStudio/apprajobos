@@ -64,6 +64,9 @@ $(document).ready(function() {
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
+		cordova.plugins.backgroundMode.configure({
+			silent: true
+		});
 		cordova.plugins.backgroundMode.enable();
 		var id = $(this).attr("data-position");
 		//Amplitude.playIndex(parseInt($(this).attr("amplitude-song-index")));
@@ -91,6 +94,7 @@ $(document).ready(function() {
 	// The plugin will run the events function each time an event is fired 
 	MusicControls.listen();
 });
+
 /* @Author: Mario
    @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)
    @Param Input: Duration audio in milliseconds
