@@ -200,9 +200,11 @@ function events(action) {
 	switch(action) {
 		case 'music-controls-next':
 			Amplitude.next();
+			Amplitude.play();
 			break;
 		case 'music-controls-previous':
 			Amplitude.prev();
+			Amplitude.play();
 			break;
 		case 'music-controls-pause':
 			Amplitude.pause();

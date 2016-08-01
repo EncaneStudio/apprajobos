@@ -3483,6 +3483,7 @@ var Amplitude = (function () {
 	function privatePause(){
 		privateRunCallback('before_pause');
 		config.active_song.pause();
+		privateChangePlayPauseState("paused");
 		
 		/*
 			Flag that pause button was clicked.
@@ -3492,7 +3493,6 @@ var Amplitude = (function () {
 		if( config.active_metadata.live ){
 			privateDisconnectStream();
 		}
-		privateChangePlayPauseState("paused");
 		privateRunCallback('after_pause');
 	}
 
