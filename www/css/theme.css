@@ -117,3 +117,7 @@ div[data-role="header"] img {
 .md-48 {
 	font-size:48px;
 }
+#portada, #sesiones, #edits, #sobremi, #reproductor {
+	-webkit-transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
+}
