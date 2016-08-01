@@ -168,7 +168,7 @@ div#small-player-full-bottom{
     Small Player Full Bottom Controls
 */
 div#small-player-full-bottom-controls{
-    width: 72px;
+    width: 200px;
     margin: auto;
 }
 
@@ -200,7 +200,7 @@ div#middle-top-previous{
     height: 20px;
     width: 23px;
     cursor: pointer;
-    background-image: url('../images/black-prev.png');
+    /*background-image: url('../images/black-prev.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
     float: left;
@@ -208,10 +208,10 @@ div#middle-top-previous{
     margin-right: 3px;
 }
 div#middle-bottom-previous{
-    height: 20px;
-    width: 23px;
+    height: 48px;
+    width: 48px;
     cursor: pointer;
-    background-image: url('../images/black-prev.png');
+    /*background-image: url('../images/black-prev.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
     float: left;
@@ -229,31 +229,31 @@ div#middle-top-play-pause.amplitude-play-pause{
     float: left;
 }
 div#middle-top-play-pause.amplitude-paused{
-    background-image: url('../images/black-play.png');
+    /*background-image: url('../images/black-play.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
 }
 div#middle-top-play-pause.amplitude-playing{
-    background-image: url('../images/black-pause.png');
+    /*background-image: url('../images/black-pause.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
 }
 
 div#small-player-bottom-play-pause.amplitude-play-pause{
     margin: auto;
-    height: 23px;
-    width: 20px;
+    height: 48px;
+    width: 48px;
     cursor: pointer;
     margin-top: 5px;
     float: left;
 }
 div#small-player-bottom-play-pause.amplitude-paused{
-    background-image: url('../images/black-play.png');
+    /*background-image: url('../images/black-play.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
 }
 div#small-player-bottom-play-pause.amplitude-playing{
-    background-image: url('../images/black-pause.png');
+   /* background-image: url('../images/black-pause.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
 }
@@ -262,10 +262,10 @@ div#small-player-bottom-play-pause.amplitude-playing{
     Next
 */
 div#middle-top-next{
-    height: 20px;
-    width: 23px;
+    height: 48px;
+    width: 48px;
     cursor: pointer;
-    background-image: url('../images/black-next.png');
+    /*background-image: url('../images/black-next.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
     float: left;
@@ -276,7 +276,7 @@ div#middle-bottom-next{
     height: 20px;
     width: 23px;
     cursor: pointer;
-    background-image: url('../images/black-next.png');
+    /*background-image: url('../images/black-next.png');*/
     background-repeat: no-repeat;
     background-size: 100%;
     float: left;

@@ -110,4 +110,10 @@ div[data-role="header"] img {
 	clear;both;
 }
 
-
+.material-icons {
+	text-shadow:none!important;
+	color:white!important;
+}
+.md-48 {
+	font-size:48px;
+}
