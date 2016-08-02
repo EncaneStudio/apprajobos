@@ -129,3 +129,12 @@ div[data-role="header"] img {
 .player-btn {
 	border:0px!important;
 }
+.infopage {
+	color:#fff!important;
+}
+.infopage h2 {
+	color:#fff!important;
+}
+.ui-dialog {
+	background:#333!important;
+}
