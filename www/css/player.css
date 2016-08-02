@@ -300,7 +300,7 @@ div#song-time-visualization{
     background-color: #bebebe;
 }
 div#song-time-visualization div.amplitude-song-time-visualization-status{
-    background-color: #3388CC;
+    background-color: #8E45AD;
     height: 5px;
 }
 
@@ -313,7 +313,7 @@ div#song-time-visualization-large{
     float: left;
 }
 div#song-time-visualization-large div.amplitude-song-time-visualization-status{
-    background-color: #3388CC;
+    background-color: #8E45AD;
     height: 5px;
 }
 
