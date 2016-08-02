@@ -11,7 +11,7 @@
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
 
-  <icon src="icon.png"/>
+  <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
   <platform name="android">
     <icon src="www/res/icon/android/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="www/res/icon/android/drawable-mdpi-icon.png" density="mdpi"/>
