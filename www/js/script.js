@@ -1,6 +1,7 @@
 var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("offline", onOffline, false);
 
 function onDeviceReady() {
 //$(document).ready(function() {
@@ -93,6 +94,10 @@ function onDeviceReady() {
 	// The plugin will run the events function each time an event is fired 
 	MusicControls.listen();
 };
+
+function onOffline() {
+	$( "#fail" ).pagecontainer( "change" );
+}
 
 /* @Author: Mario
    @Description: Convert MilliSecond to Second's and keep if is Edit or not (not = sesion)

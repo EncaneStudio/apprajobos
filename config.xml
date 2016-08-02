@@ -10,6 +10,7 @@
   <plugin name="cordova-plugin-network-information" spec="1.2.1" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
+  <plugin name="br.com.paveisitemas.splashscreen" spec="2.1.1" source="pgb" />
 
   <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
   <platform name="android">
