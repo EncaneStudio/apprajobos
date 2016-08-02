@@ -126,3 +126,6 @@ div[data-role="header"] img {
 .tracky h2 {
 	font-family:'Avenir LT Std 95 Black'!important;
 }
+.player-btn {
+	border:0px!important;
+}
