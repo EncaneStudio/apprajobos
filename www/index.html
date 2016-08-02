@@ -25,6 +25,7 @@
 				<div data-role="header" data-position="fixed" class="header" data-tap-toggle="false">
 					<a href="#reproductor" class="player-btn"><i class="material-icons">library_music</i></a>
 					<div align="center"><img src="img/headlogo.png" /></div>
+					<a href="#info" class="player-btn" data-rel="dialog" data-transition="slidedown"><i class="material-icons">info_outline</i></a>
 					<div data-role="navbar" >
 						<ul>
 						  <li class="tab ui-tabs-active"><a href="#portada" class="ui-btn-active" data-ajax="false">Nuevo</a></li>
@@ -84,6 +85,14 @@
 			</div>
 		</div>
 		<div data-role="page" id="reproductor">
+		</div>
+		<div data-role="page" id="dialogPage">
+		  <div data-role="header">
+			<h2>Sobre la aplicación</h2>
+		  </div>
+		  <div role="main" class="ui-content">
+			<p>La aplicación es bla bla bla</p>
+		  </div>
 		</div>
 	</body>
 </html>
