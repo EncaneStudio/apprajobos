@@ -1,12 +1,15 @@
+body {
+	font-family:'Avenir LT Std 35 Light'!important;
+	text-shadow:none!important;
+}
 .ui-page {
-	background-image:url("images/bg.png")!important;
+	/*background-image:url("images/bg.png")!important;*/
+	background:#333;
     background-attachment:fixed;
 	color: #fff!important;
-    text-shadow: 0 1px 0 #005599!important;
 }
 .ui-btn {
 	color: #fff!important;
-    text-shadow: 0 1px 0 #005599!important;
 	border-color:#333!important;
 }
 div[data-role="header"] {
@@ -18,18 +21,6 @@ div[data-role="header"] img {
 }
 .header {
 	border-color:#333!important;
-}
-.header .ui-btn {
-	background-color:#2b2d2d!important;
-	border-color:#333!important;
-	color:#FFF!important;
-	text-shadow: 0 1px 0 #005599!important;
-}
-.header .ui-btn-active {
-	background-color: #3388cc!important;
-    border-color: #3388cc!important;
-    color: #fff!important;
-    text-shadow: 0 1px 0 #005599!important;
 }
 #sesiones .ui-btn, #edits .ui-btn, #portada .ui-btn {
 	background:none!important;
@@ -120,4 +111,15 @@ div[data-role="header"] img {
 #portada, #sesiones, #edits, #sobremi, #reproductor {
 	-webkit-transform: translateZ(0);
 	-webkit-backface-visibility: hidden;
+}
+.header .ui-btn {
+	font-family:'Avenir LT Std 65 Medium'!important;
+	background-color:#2b2d2d!important;
+	box-shadow:none!important;
+	border-bottom:3px solid #2B2D2D!important;
+}
+.header .tab[aria-selected='true'] a{
+	box-shadow:none!important;
+	border-bottom:3px solid #8E45AD!important;
+	background:#2B2D2D;
 }
