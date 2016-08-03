@@ -1,10 +1,10 @@
 var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
-//document.addEventListener("deviceready", onDeviceReady, false);
-//document.addEventListener("offline", onOffline, false);
+document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("offline", onOffline, false);
 
-//function onDeviceReady() {
-$(document).ready(function() {
+function onDeviceReady() {
+//$(document).ready(function() {
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
@@ -93,7 +93,7 @@ $(document).ready(function() {
 	// Start listening for events 
 	// The plugin will run the events function each time an event is fired 
 	MusicControls.listen();
-});
+};
 
 function onOffline() {
 	$( "#fail" ).pagecontainer( "change" );
