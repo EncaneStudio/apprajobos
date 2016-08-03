@@ -3227,7 +3227,7 @@ var Amplitude = (function () {
 				for( var i = 0; i < currentPlayPauseControls.length; i++ ){
 					currentPlayPauseControls[i].classList.add('amplitude-playing');
 					currentPlayPauseControls[i].classList.remove('amplitude-paused');
-					currentPlayPauseControls[i].children[0].innerHTML = 'pause_circle_outline';
+					currentPlayPauseControls[i].children[0].innerHTML = 'play_circle_outline';
 				}
 			}
 
@@ -3241,7 +3241,7 @@ var Amplitude = (function () {
 				for( var i = 0; i < mainControls.length; i++ ){
 					mainControls[i].classList.add('amplitude-playing');
 					mainControls[i].classList.remove('amplitude-paused');
-					mainControls[i].children[0].innerHTML ='pause_circle_outline';
+					mainControls[i].children[0].innerHTML ='play_circle_outline';
 				}
 			}
 		}
@@ -3261,6 +3261,7 @@ var Amplitude = (function () {
 				for( var i = 0; i < currentPlayPauseControls.length; i++ ){
 					currentPlayPauseControls[i].classList.remove('amplitude-playing');
 					currentPlayPauseControls[i].classList.add('amplitude-paused');
+					currentPlayPauseControls[i].children[0].innerHTML ='pause_circle_outline';
 				}
 			}
 
@@ -3274,6 +3275,7 @@ var Amplitude = (function () {
 				for( var i = 0; i < mainControls.length; i++ ){
 					mainControls[i].classList.add('amplitude-paused');
 					mainControls[i].classList.remove('amplitude-playing');
+					mainControls[i].children[0].innerHTML ='pause_circle_outline';
 				}
 			}
 		}

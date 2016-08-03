@@ -68,8 +68,8 @@ function onDeviceReady() {
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
-		var id = $(this).attr("data-position");
-		//Amplitude.playIndex(parseInt($(this).attr("amplitude-song-index")));
+		var id = $(this).find("a").attr("amplitude-song-index");
+		Amplitude.playIndex();
 	});
 	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
 	$(".ui-footer").find(".next").on("click",function() {
