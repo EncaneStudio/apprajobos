@@ -2538,7 +2538,7 @@ var Amplitude = (function () {
 		/*
 			Checks to see if the new song is a different album.
 		*/
-		privateCheckNewAlbum( config.songs[new_song_index].album );
+		//privateCheckNewAlbum( config.songs[new_song_index].album );
 
 		/*
 			Changes the active song index that is being played.
