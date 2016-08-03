@@ -1049,6 +1049,7 @@ var Amplitude = (function () {
 		privateResetSongStatusSliders();
 		privateStartVisualization();
 		privatePlay();
+		privateChangePlayPauseState("playing");
 	}
 	/*--------------------------------------------------------------------------
 		HANDLER FOR: 'amplitude-pause'
