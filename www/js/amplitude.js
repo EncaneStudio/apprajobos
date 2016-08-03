@@ -1045,7 +1045,6 @@ var Amplitude = (function () {
 	}
 
 	function privatePlayIndex(song_id) {
-		console.log("Has clickado en"+ song_id);
 		privateChangeSong(song_id);
 		privateResetSongStatusSliders();
 		privateStartVisualization();
@@ -2482,8 +2481,6 @@ var Amplitude = (function () {
 				grab certain attributes from the song and use them
 				in the config accordingly.
 			*/
-			console.log(index);
-			console.log(config.songs[2]);
 			config.active_song.src 	= config.songs[index].url;
 			config.active_metadata 	= config.songs[index];
 			config.active_album 	= config.songs[index].album;
