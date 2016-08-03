@@ -2529,7 +2529,7 @@ var Amplitude = (function () {
 		@param int new_song_index The integer index of the song
 		that will be played. 
 	--------------------------------------------------------------------------*/
-	function privateChangeSong( new_song_index, isnew=false ){
+	function privateChangeSong( new_song_index ){
 		/*
 			Stops the currently playing song.
 		*/
@@ -2538,7 +2538,6 @@ var Amplitude = (function () {
 		/*
 			Checks to see if the new song is a different album.
 		*/
-		if(isnew==false)
 		privateCheckNewAlbum( config.songs[new_song_index].album );
 
 		/*
