@@ -1050,6 +1050,7 @@ var Amplitude = (function () {
 		privateStartVisualization();
 		privatePlay();
 		privateChangePlayPauseState("playing");
+		privateChangeActiveVinil(song_id);
 	}
 	/*--------------------------------------------------------------------------
 		HANDLER FOR: 'amplitude-pause'
@@ -1333,6 +1334,7 @@ var Amplitude = (function () {
 					Sets the new shuffle active index to be used in the shuffled songs object.
 				*/
 				config.shuffle_active_index = newIndex;
+				privateChangeActiveVinil(newIndex);
 			}else{
 				/*
 					Check new album
@@ -1360,6 +1362,7 @@ var Amplitude = (function () {
 					Sets the new shuffle active index to be used in the shuffled songs object.
 				*/
 				config.shuffle_active_index = 0;
+				privateChangeActiveVinil(0);
 			}
 		}else{
 			if( parseInt(config.active_index) + 1 < config.songs.length ){
@@ -1391,6 +1394,7 @@ var Amplitude = (function () {
 					Sets the new active index to be used with the songs object
 				*/
 				config.active_index = newIndex;
+				privateChangeActiveVinil(newIndex);
 			}else{
 				/*
 					Check new album
@@ -1417,6 +1421,7 @@ var Amplitude = (function () {
 					Sets the new active index to be used with the songs object
 				*/
 				config.active_index = 0;
+				privateChangeActiveVinil(0);
 			}
 		}
 		
@@ -1495,6 +1500,7 @@ var Amplitude = (function () {
 					Sets the new shuffle active index to be used in the shuffled songs object.
 				*/
 				config.shuffle_active_index = newIndex;
+				privateChangeActiveVinil(newIndex);
 			}else{
 				/*
 					Gets the new index in the shuffle array for the song we need.
@@ -1527,6 +1533,7 @@ var Amplitude = (function () {
 					Sets the new shuffle active index to be used in the shuffled songs object.
 				*/
 				config.shuffle_active_index = newIndex;
+				privateChangeActiveVinil(0);
 			}
 		}else{
 			if( ( parseInt( config.active_index ) - 1 ) >= 0 ){
@@ -1559,6 +1566,7 @@ var Amplitude = (function () {
 					Sets the new active index to be used with the songs object
 				*/
 				config.active_index = newIndex;
+				privateChangeActiveVinil(newIndex);
 			}else{
 
 				var newIndex = config.songs.length - 1;
@@ -1588,6 +1596,7 @@ var Amplitude = (function () {
 					Sets the new active index to be used with the songs object
 				*/
 				config.active_index = newIndex;
+				privateChangeActiveVinil(newIndex);
 			}
 		}
 		
@@ -2658,11 +2667,12 @@ var Amplitude = (function () {
 			of the song that is actively playing.
 		*/
 		privateSetActiveContainer();
+		privateChangeActiveVinil();
 
 		/*
 			Plays the new song.
 		*/
-		privatePlay();
+		privatePlay();	
 	}
 
 	/*--------------------------------------------------------------------------
@@ -3229,7 +3239,8 @@ var Amplitude = (function () {
 					currentPlayPauseControls[i].classList.add('amplitude-playing');
 					currentPlayPauseControls[i].classList.remove('amplitude-paused');
 					currentPlayPauseControls[i].children[0].innerHTML = 'pause_circle_outline';
-				}
+				}		
+				privateChangePlayPauseViniloState(state);
 			}
 
 			/*
@@ -3243,7 +3254,10 @@ var Amplitude = (function () {
 					mainControls[i].classList.add('amplitude-playing');
 					mainControls[i].classList.remove('amplitude-paused');
 					mainControls[i].children[0].innerHTML ='pause_circle_outline';
+
 				}
+				
+				privateChangePlayPauseViniloState(state);
 			}
 		}
 
@@ -3264,6 +3278,7 @@ var Amplitude = (function () {
 					currentPlayPauseControls[i].classList.add('amplitude-paused');
 					currentPlayPauseControls[i].children[0].innerHTML ='play_circle_outline';
 				}
+				privateChangePlayPauseViniloState(state);
 			}
 
 			/*
@@ -3278,6 +3293,7 @@ var Amplitude = (function () {
 					mainControls[i].classList.remove('amplitude-playing');
 					mainControls[i].children[0].innerHTML ='play_circle_outline';
 				}
+				privateChangePlayPauseViniloState(state);
 			}
 		}
 	}
@@ -3555,7 +3571,42 @@ var Amplitude = (function () {
 		config.active_song.src = config.active_metadata.url;
 		config.active_song.load();
 	}
+	
+	function privateChangeActiveVinil(new_index = null) {
+		
+		var tracks = document.querySelectorAll(".vinilo");
+		
+		if(new_index==null) {
+			var new_selected = document.querySelector(".amplitude-active-song-container > .vinilo");
+			for( var i = 0; i < tracks.length; i++ ){
+				tracks[i].classList.remove("vin_playing");
+				tracks[i].classList.remove("vin_active");
+			}
+			
+			new_selected.classList.add("vin_active");
+			new_selected.classList.add("vin_playing");	
+		}else {
+			var new_selected = document.querySelector(".amplitude-song-container[amplitude-song-index='"+new_index+"'] > .vinilo");
+			
+			for( var i = 0; i < tracks.length; i++ ){
+				tracks[i].classList.remove("vin_playing");
+				tracks[i].classList.remove("vin_active");
+			}
+			
+			new_selected.classList.add("vin_active");
+			new_selected.classList.add("vin_playing");
+		}
+	}
+	
+	function privateChangePlayPauseViniloState(state) {
+		var active = document.querySelector(".amplitude-active-song-container > .vinilo");
+		if(state == "playing")
+			active.classList.add("vin_playing");
+		if(state== "paused")
+			active.classList.remove("vin_playing");
+	}
 
+	
 	/*
 		Defines which methods and variables are public.
 	*/

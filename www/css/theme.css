@@ -1,3 +1,16 @@
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
 body {
 	font-family:'Avenir LT Std 35 Light'!important;
 	text-shadow:none!important;
@@ -137,4 +150,22 @@ div[data-role="header"] img {
 }
 .ui-dialog {
 	background:#333!important;
+}
+.vinilo {
+    background-image: url("../img/vinilo.svg");
+	right: 0.5625em;
+	margin-top: -11px;
+    top: 50%;
+	content: "";
+    display: block;
+    height: 22px;
+    position: absolute;
+    width: 22px;
+}
+.vin_active {
+	background-image: url("../img/vinilo-playing.svg");
+}
+.vin_playing {
+	-moz-animation: spin .5s infinite linear;
+    -webkit-animation: spin .5s infinite linear;
 }

@@ -1,10 +1,10 @@
 var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
-document.addEventListener("deviceready", onDeviceReady, false);
-document.addEventListener("offline", onOffline, false);
+//document.addEventListener("deviceready", onDeviceReady, false);
+//document.addEventListener("offline", onOffline, false);
 
-function onDeviceReady() {
-//$(document).ready(function() {
+//function onDeviceReady() {
+$(document).ready(function() {
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
@@ -29,7 +29,7 @@ function onDeviceReady() {
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(infotrack);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
-			var $li = $("<li>", { "class": "track", "data-position":index });
+			var $li = $("<li>", { "class": "track", "data-position":index, "data-icon":"false"});
 			//Cargamos la plantilla track.html...
 			$li.load("track.html", function() {
 				//Y se asignan los datos a la plantilla
@@ -71,29 +71,14 @@ function onDeviceReady() {
 		var id = $(this).find("a").attr("amplitude-song-index");
 		Amplitude.playIndex(id);
 	});
-	$(".ui-footer").on("swipeup",function() {alert("HOLA");});
-	$(".ui-footer").find(".next").on("click",function() {
-		//ToneDen.player.getInstanceByDom("#player").next();
-	});
-	$(".ui-footer").find(".prev").on("click",function() {
-		//ToneDen.player.getInstanceByDom("#player").prev();
-	});
-	$(".ui-footer").find(".play").on("click",function() {
-		if($(this).hasClass("tdicon-play-circle-outline")){
-			$(this).removeClass("tdicon-play-circle-outline").addClass("tdicon-pause-circle-outline");
-			//ToneDen.player.getInstanceByDom("#player").togglePause(false);
-		}else {
-			$(this).removeClass("tdicon-pause-circle-outline").addClass("tdicon-play-circle-outline");
-			//ToneDen.player.getInstanceByDom("#player").togglePause(true);
-		}
-	});	 
+	
 	// Register callback 
-	MusicControls.subscribe(events);
+	//MusicControls.subscribe(events);
 	 
 	// Start listening for events 
 	// The plugin will run the events function each time an event is fired 
-	MusicControls.listen();
-};
+	//MusicControls.listen();
+});
 
 function onOffline() {
 	$( "#fail" ).pagecontainer( "change" );
@@ -239,7 +224,7 @@ function events(action) {
 }
 
 function changeMusicControl() {
-	var song = Amplitude.getActiveSongMetadata();
+	/*var song = Amplitude.getActiveSongMetadata();
 	
 	MusicControls.create({
 		track       : song.name,        // optional, default : ''
@@ -255,7 +240,7 @@ function changeMusicControl() {
 		// Android only, optional
 		// text displayed in the status bar when the notification (and the ticker) are updated
 		ticker    : song.name
-	});
+	});*/
 }
 
 function replaceArtworkSize(url,size) {
@@ -265,5 +250,5 @@ function replaceArtworkSize(url,size) {
 }
 
 function tooglePausedMusicControl() {
-	MusicControls.updateIsPlaying(false);
+	//MusicControls.updateIsPlaying(false);
 }
