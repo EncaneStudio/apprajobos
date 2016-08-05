@@ -6,6 +6,7 @@ document.addEventListener("backbutton", onBackButton, false);
 
 function onDeviceReady() {
 //$(document).ready(function() {
+	new SwipingTabs("#tabs",300,"#nav");
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
