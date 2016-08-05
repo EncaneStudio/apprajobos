@@ -83,7 +83,7 @@ function onDeviceReady() {
 
 
 function onBackButton(e){
-	if($.mobile.activePage.is('#portada')){
+	if($.mobile.activePage.is('#homepage')){
 		e.preventDefault();
 		navigator.notification.confirm(
 			'¿Estás seguro que quieres cerrar la aplicación?', // message
