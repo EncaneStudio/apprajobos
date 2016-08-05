@@ -2,12 +2,10 @@ var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("offline", onOffline, false);
-document.addEventListener("backbutton", onBackButton(e), false);
+document.addEventListener("backbutton", onBackButton, false);
 
 function onDeviceReady() {
 //$(document).ready(function() {
-	StatusBar.backgroundColorByHexString("#2B2D2D");
-	StatusBar.styleLightContent();
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
