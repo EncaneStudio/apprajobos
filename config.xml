@@ -1,13 +1,12 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.encaneestudio.rajobosapp" version="1.0.0">
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.zerostudio.rajobosapp" version="1.0.0">
   <name>Dj Rajobos</name>
   <description>Escucha mis sesiones y temas en cualquier lugar.</description>
-  <author href="http://encaneestudio.com" email="support@encaneestudio.com">Encane Team</author>
+  <author href="http://zerostudio.com" email="support@zerostudio.com">Encane Team</author>
   <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
   <preference name="AndroidLaunchMode" value="singleTask"/>
   <preference name="BackgroundColor" value="#333333"  /> 
-  <plugin name="cordova-plugin-media" spec="2.2.0" />
   <plugin name="cordova-plugin-network-information" spec="1.2.1" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
