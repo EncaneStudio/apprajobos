@@ -10,11 +10,7 @@
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
   <plugin name="br.com.paveisitemas.splashscreen" spec="2.1.1" source="pgb" />
-  <plugin name="cordova-plugin-crosswalk-webview" spec="1.8.0" source="npm"/>
-  <preference name="xwalkVersion" value="org.xwalk:xwalk_core_library:14+" />
-  <preference name="xwalkVersion" value="xwalk_core_library:14+" />
-  <preference name="xwalkVersion" value="14+" />
-  <preference name="xwalkVersion" value="14" />
+  <plugin name="cordova-plugin-crosswalk-webview" source="npm"/>
   <preference name="xwalkMode" value="lite" />
   <preference name="BackgroundColor" value="#333333"  /> 
   <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
