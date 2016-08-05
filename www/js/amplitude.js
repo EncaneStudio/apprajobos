@@ -3485,9 +3485,9 @@ var Amplitude = (function () {
 			is not clicked. If the pause button was clicked then we don't reconnect
 			or the user will lose their place in the stream.
 		*/
-		//if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && !config.paused ) {
-		//	privateReconnectStream();
-		//}
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && !config.paused ) {
+			privateReconnectStream();
+		}
 
 		config.active_song.play();
 		config.active_song.playbackRate = config.playback_speed;
