@@ -12,6 +12,7 @@
   <plugin name="br.com.paveisitemas.splashscreen" spec="2.1.1" source="pgb" />
   <plugin name="cordova-plugin-crosswalk-webview" source="npm"/>
   <plugin name="com.phonegap.plugin.statusbar" spec="1.1.0" source="pgb" />
+  <plugin name="cordova-plugin-dialogs" source="npm" />
   <preference name="StatusBarBackgroundColor" value="#2B2D2D" />
   <preference name="xwalkMode" value="lite" />
   <preference name="BackgroundColor" value="#333333"  />
