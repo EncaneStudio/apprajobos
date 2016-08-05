@@ -6,7 +6,6 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
   <preference name="AndroidLaunchMode" value="singleTask"/>
-  <preference name="BackgroundColor" value="#333333"  /> 
   <plugin name="cordova-plugin-network-information" spec="1.2.1" />
   <plugin name="com.indigoway.cordova.whitelist.whitelistplugin" spec="1.1.1" source="pgb" />
   <plugin spec="https://github.com/homerours/cordova-music-controls-plugin" source="git" />
@@ -14,6 +13,8 @@
   <plugin name="cordova-plugin-crosswalk-webview" spec="1.8.0" source="npm">
 	<param name="XWALK_MODE" value="lite" />
   </plugin>
+  <preference name="xwalkMode" value="lite" />
+  <preference name="BackgroundColor" value="#333333"  /> 
   <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
   <platform name="android">
     <icon src="www/res/icon/android/drawable-ldpi-icon.png" density="ldpi"/>
