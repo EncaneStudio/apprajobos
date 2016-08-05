@@ -3,18 +3,18 @@ attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("offline", onOffline, false);
 document.addEventListener("backbutton", function(e){
-if($.mobile.activePage.is('#homepage')){
-    e.preventDefault();
+	if($.mobile.activePage.is('#portada')){
+		e.preventDefault();
 		navigator.notification.confirm(
-		'¿Estás seguro que quieres cerrar la aplicación?', // message
-		 onConfirm,            // callback to invoke with index of button pressed
-		'Salir',           // title
-		['Si','No']     // buttonLabels
-	);
-}
-else {
-    navigator.app.backHistory()
-}
+			'¿Estás seguro que quieres cerrar la aplicación?', // message
+			 onConfirm,            // callback to invoke with index of button pressed
+			'Salir',           // title
+			['Si','No']     // buttonLabels
+		);
+	}
+	else {
+		navigator.app.backHistory()
+	}
 }, false);
 
 function onConfirm() {
