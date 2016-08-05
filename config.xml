@@ -13,6 +13,8 @@
   <plugin name="cordova-plugin-crosswalk-webview" source="npm"/>
   <plugin name="com.phonegap.plugin.statusbar" spec="1.1.0" source="pgb" />
   <preference name="StatusBarBackgroundColor" value="#2B2D2D" />
+  <preference name="xwalkMode" value="lite" />
+  <preference name="BackgroundColor" value="#333333"  />
   <preference name="StatusBarStyle" value="lightcontent" />  
   <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
   <platform name="android">
