@@ -291,7 +291,6 @@ function tooglePausedMusicControl() {
 }
 
 function go(event) {
-	event.preventDefault();
 	var active_tab = $("#tabs").tabs('option', 'active');
 	console.log(active_tab);
     switch(event.type) {
