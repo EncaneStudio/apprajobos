@@ -3,10 +3,10 @@ attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("offline", onOffline, false);
 document.addEventListener("backbutton", onBackButton, false);
+$('.tab-contenido').on('swipeleft, swiperight ', go);
 
 function onDeviceReady() {
 //$(document).ready(function() {
-	new SwipingTabs("#tabs",300,"#nav");
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
@@ -288,4 +288,26 @@ function replaceArtworkSize(url,size) {
 
 function tooglePausedMusicControl() {
 	MusicControls.updateIsPlaying(false);
+}
+
+function go(event) {
+	event.preventDefault();
+	var active_tab = $("#tabs").tabs('option', 'active');
+	console.log(active_tab);
+    switch(event.type) {
+        case 'swiperight':
+			if(active_tab = 4) {
+				$( "#tabs" ).tabs( "option", "active", 1 );
+			}else {
+				$( "#tabs" ).tabs( "option", "active", active_tab+1 );
+			}
+            break;
+        case 'swipeleft':
+            if(active_tab == 1) {
+				$( "#tabs" ).tabs( "option", "active", 4 );
+			}else {
+				$( "#tabs" ).tabs( "option", "active", active_tab-1 );
+			}
+            break;
+    }
 }
