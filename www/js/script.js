@@ -67,8 +67,8 @@ function onDeviceReady() {
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
-	$(".tracklist").on("click","a", function() {
-		var id = $(this).attr("amplitude-song-index");
+	$(".tracklist").on("click","li", function() {
+		var id = $(this).find("a").attr("amplitude-song-index");
 		Amplitude.playIndex(id);
 	});
 	
