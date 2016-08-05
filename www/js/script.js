@@ -292,18 +292,17 @@ function tooglePausedMusicControl() {
 
 function go(event) {
 	var active_tab = $("#tabs").tabs('option', 'active');
-	console.log(active_tab);
     switch(event.type) {
         case 'swiperight':
-			if(active_tab = 4) {
-				$( "#tabs" ).tabs( "option", "active", 1 );
+			if(active_tab == 3) {
+				$( "#tabs" ).tabs( "option", "active", 0 );
 			}else {
 				$( "#tabs" ).tabs( "option", "active", active_tab+1 );
 			}
             break;
         case 'swipeleft':
-            if(active_tab == 1) {
-				$( "#tabs" ).tabs( "option", "active", 4 );
+            if(active_tab == 0) {
+				$( "#tabs" ).tabs( "option", "active", 3 );
 			}else {
 				$( "#tabs" ).tabs( "option", "active", active_tab-1 );
 			}
