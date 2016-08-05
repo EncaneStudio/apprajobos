@@ -65,40 +65,40 @@ div[data-role="header"] img {
 	width:25px;
 	height:25px;
 	margin-right:10px;
-	background-image:url("../img/tw.png");
+	background-image:url("../img/tw.svg");
 }
 .tw:hover	{
-	background-image:url("../img/twh.png");
+	background-image:url("../img/twh.svg");
 }
 .fb	{
 	float:left;
 	width:25px;
 	height:25px;
 	margin-right:10px;
-	background-image:url("../img/fb.png");
+	background-image:url("../img/fb.svg");
 }
 .fb:hover	{
-	background-image:url("../img/fbh.png");
+	background-image:url("../img/fbh.svg");
 }
 .you	{
 	float:left;
 	width:25px;
 	height:25px;
 	margin-right:10px;
-	background-image:url("../img/you.png");
+	background-image:url("../img/you.svg");
 }
 .you:hover	{
-	background-image:url("../img/youh.png");
+	background-image:url("../img/youh.svg");
 }
 .ins	{
 	float:left;
 	width:25px;
 	height:25px;
 	margin-right:10px;
-	background-image:url("../img/ins.png");
+	background-image:url("../img/ins.svg");
 }
 .ins:hover	{
-	background-image:url("../img/insh.png");
+	background-image:url("../img/insh.svg");
 }
 .texto1 {
 	margin-right:2px;

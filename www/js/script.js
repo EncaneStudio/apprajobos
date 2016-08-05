@@ -29,7 +29,7 @@ function onDeviceReady() {
 			//almaceno las urls de streaming de cada cancion para luego acceder rapidamente a ellas
 			canciones.push(infotrack);
 			//Creamos un elemento li, con clase track para los estilos y su posicion
-			var $li = $("<li>", { "class": "track", "data-position":index, "data-icon":"false"});
+			var $li = $("<li>", { "class": "track", "data-position":index});
 			//Cargamos la plantilla track.html...
 			$li.load("track.html", function() {
 				//Y se asignan los datos a la plantilla
@@ -67,8 +67,8 @@ function onDeviceReady() {
 	});
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
-	$(".tracklist").on("click","li", function() {
-		var id = $(this).find("a").attr("amplitude-song-index");
+	$(".tracklist").on("click","a", function() {
+		var id = $(this).attr("amplitude-song-index");
 		Amplitude.playIndex(id);
 	});
 	
