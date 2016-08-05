@@ -3583,27 +3583,33 @@ var Amplitude = (function () {
 				tracks[i].classList.remove("vin_active");
 			}
 			
-			new_selected.classList.add("vin_active");
-			new_selected.classList.add("vin_playing");	
+			for( var i = 0; i < new_selected.length; i++ ){
+				new_selected[i].classList.add("vin_active");
+				new_selected[i].classList.add("vin_playing");	
+			}
 		}else {
-			var new_selected = document.querySelector(".amplitude-song-container[amplitude-song-index='"+new_index+"'] > .vinilo");
+			var new_selected = document.querySelectorAll(".amplitude-song-container[amplitude-song-index='"+new_index+"'] > .vinilo");
 			
 			for( var i = 0; i < tracks.length; i++ ){
 				tracks[i].classList.remove("vin_playing");
 				tracks[i].classList.remove("vin_active");
 			}
 			
-			new_selected.classList.add("vin_active");
-			new_selected.classList.add("vin_playing");
+			for( var i = 0; i < new_selected.length; i++ ){
+				new_selected[i].classList.add("vin_active");
+				new_selected[i].classList.add("vin_playing");
+			}
 		}
 	}
 	
 	function privateChangePlayPauseViniloState(state) {
-		var active = document.querySelector(".amplitude-active-song-container > .vinilo");
-		if(state == "playing")
-			active.classList.add("vin_playing");
-		if(state== "paused")
-			active.classList.remove("vin_playing");
+		var active = document.querySelectorAll(".amplitude-active-song-container > .vinilo");
+		for( var i = 0; i < active.length; i++ ){
+			if(state == "playing")
+				active[i].classList.add("vin_playing");
+			if(state== "paused")
+				active[i].classList.remove("vin_playing");
+		}
 	}
 
 	
