@@ -2,24 +2,7 @@ var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("offline", onOffline, false);
-document.addEventListener("backbutton", function(e){
-	if($.mobile.activePage.is('#portada')){
-		e.preventDefault();
-		navigator.notification.confirm(
-			'¿Estás seguro que quieres cerrar la aplicación?', // message
-			 onConfirm,            // callback to invoke with index of button pressed
-			'Salir',           // title
-			['Si','No']     // buttonLabels
-		);
-	}
-	else {
-		navigator.app.backHistory()
-	}
-}, false);
-
-function onConfirm() {
-	navigator.app.exitApp();
-}
+document.addEventListener("backbutton", onBackButton(e), false);
 
 function onDeviceReady() {
 //$(document).ready(function() {
@@ -98,8 +81,41 @@ function onDeviceReady() {
 	MusicControls.listen();
 };
 
+
+function onBackButton(e){
+	if($.mobile.activePage.is('#portada')){
+		e.preventDefault();
+		navigator.notification.confirm(
+			'¿Estás seguro que quieres cerrar la aplicación?', // message
+			 onConfirm,            // callback to invoke with index of button pressed
+			'Salir',           // title
+			['No','Si']     // buttonLabels
+		);
+	}
+	else {
+		navigator.app.backHistory()
+	}
+}
+
+function onConfirm(buttonIndex) {
+	if(buttonIndex==2)
+		navigator.app.exitApp();
+}
+
 function onOffline() {
-	$( "#fail" ).pagecontainer( "change" );
+	navigator.notification.confirm(
+		'La aplicación requiere conexión a internet', // message
+		 onOfflineConfirm,            // callback to invoke with index of button pressed
+		'Error',           // title
+		['Cerrar','Reintentar']     // buttonLabels
+	);
+}
+
+function onOfflineConfirm(buttonIndex) {
+	if(buttonIndex==1)
+		navigator.app.exitApp();
+	if(buttonIndex==2)
+		document.location = "index.html";
 }
 
 /* @Author: Mario
