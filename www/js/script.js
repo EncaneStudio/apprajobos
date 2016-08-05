@@ -6,7 +6,7 @@ document.addEventListener("backbutton", onBackButton, false);
 
 function onDeviceReady() {
 //$(document).ready(function() {
-	$('#homepage').on('swipeleft, swiperight ', go);
+	$('#homepage').on('swipeleft swiperight', go(event));
 	$( "#reproductor" ).load( "player.html" );
 	//ID del usuario, ID Cliente, posicion inicial de cada cancion (para más adelante) y fecha de nacimiento
 	var id = "181783637", client_id ="f36abe5e283bc2059b1f55507af890eb", canciones=[], nacimiento="1989-06-07";
@@ -293,14 +293,14 @@ function tooglePausedMusicControl() {
 function go(event) {
 	var active_tab = $("#tabs").tabs('option', 'active');
     switch(event.type) {
-        case 'swiperight':
+        case 'swipeleft':
 			if(active_tab == 3) {
 				$( "#tabs" ).tabs( "option", "active", 0 );
 			}else {
 				$( "#tabs" ).tabs( "option", "active", active_tab+1 );
 			}
             break;
-        case 'swipeleft':
+        case 'swiperight':
             if(active_tab == 0) {
 				$( "#tabs" ).tabs( "option", "active", 3 );
 			}else {
