@@ -3623,6 +3623,7 @@ var Amplitude = (function () {
 		var elem = document.querySelector("#reproductor");
 		elem.style.background = "url('"+config.songs[song_index].cover_art_url+"')";	
 		elem.style.backgroundSize = "auto 100%";	
+		elem.style.backgroundPosition = "top center";	
 	}
 	
 	/*

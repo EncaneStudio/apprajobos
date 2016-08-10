@@ -194,7 +194,7 @@ div#small-player-full-bottom-info span.current-time{
 }
 div#small-player-full-bottom-info span.time-duration{
     display: block;
-    float: left;
+    float: right;
     margin-top: -3px;
     margin-left: 3px;
 	width:9%;
@@ -410,12 +410,12 @@ img#soundcloud-image{
 input[type=range]{
     -webkit-appearance: none;
 	border:none!important;
-	float:left;
+	margin:auto;
 	margin-top:-7px;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 78%;
+    width: 97%;
     height: 5px;
     background: #fff;
     border: none;
@@ -450,7 +450,7 @@ input[type=range]{
     border: 1px solid white; 
 
     /*required for proper track sizing in FF*/
-    width: 78%;
+    width: 97%;
 }
 
 input[type="range"]::-moz-range-progress {
