@@ -474,6 +474,15 @@ input[type=range]::-moz-range-thumb {
 	border:1px solid #333;
 	bottom:-1px;
 }
+input[type=range]::-webkit-range-thumb {
+    border: none;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #8E45AD;
+	border:1px solid #333;
+	bottom:-1px;
+}
 
 /*hide the outline behind the border*/
 input[type=range]:-moz-focusring{

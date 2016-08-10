@@ -3622,7 +3622,7 @@ var Amplitude = (function () {
 		console.log("Index: "+song_index+" - "+config.songs[song_index].cover_url);
 		var elem = document.querySelector("#reproductor");
 		elem.style.background = "url('"+config.songs[song_index].cover_art_url+"')";	
-		elem.style.backgroundSize = "100% 100%";	
+		elem.style.backgroundSize = "auto 100%";	
 	}
 	
 	/*

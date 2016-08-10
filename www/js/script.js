@@ -1,11 +1,11 @@
 var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
-//document.addEventListener("deviceready", onDeviceReady, false);
-//document.addEventListener("offline", onOffline, false);
-//document.addEventListener("backbutton", onBackButton, false);
+document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("offline", onOffline, false);
+document.addEventListener("backbutton", onBackButton, false);
 
-//function onDeviceReady() {
-$(document).ready(function() {
+function onDeviceReady() {
+//$(document).ready(function() {
 	$('#homepage').on('swipeleft', go);
 	$('#homepage').on('swiperight', go);
 	$( "#reproductor" ).load( "player.html" );
@@ -76,12 +76,12 @@ $(document).ready(function() {
 	});
 	
 	// Register callback 
-	//MusicControls.subscribe(events);
+	MusicControls.subscribe(events);
 	 
 	// Start listening for events 
 	// The plugin will run the events function each time an event is fired 
-	//MusicControls.listen();
-});
+	MusicControls.listen();
+};
 
 
 function onBackButton(e){
@@ -264,7 +264,7 @@ function events(action) {
 function changeMusicControl() {
 	var song = Amplitude.getActiveSongMetadata();
 	
-	/*MusicControls.create({
+	MusicControls.create({
 		track       : song.name,        // optional, default : ''
 		cover       : song.cover_art_url,      // optional, default : nothing
 		isPlaying   : true,                         // optional, default : true
@@ -278,7 +278,7 @@ function changeMusicControl() {
 		// Android only, optional
 		// text displayed in the status bar when the notification (and the ticker) are updated
 		ticker    : song.name
-	});*/
+	});
 }
 
 function replaceArtworkSize(url,size) {
@@ -288,7 +288,7 @@ function replaceArtworkSize(url,size) {
 }
 
 function tooglePausedMusicControl() {
-	//MusicControls.updateIsPlaying(false);
+	MusicControls.updateIsPlaying(false);
 }
 
 function go(event) {
