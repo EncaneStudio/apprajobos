@@ -1836,6 +1836,8 @@ var Amplitude = (function () {
 			with the same song index as the active song.
 		*/
 		var current_slider = '';
+		
+		
 
 		if( document.querySelector('[amplitude-singular-song-slider="true"]') ){
 			current_slider = document.querySelector('[amplitude-singular-song-slider="true"]');
@@ -1843,6 +1845,7 @@ var Amplitude = (function () {
 			current_slider = document.querySelector('input[amplitude-song-index="'+config.active_index+'"]');
 		}
 
+		
 		/*
 			When we find the right visualization, we set the value to the percentage of 
 			completion only if the song isn't live. Since it's 'infinite' if 
@@ -1851,6 +1854,7 @@ var Amplitude = (function () {
 		*/
 
 		if( !config.active_metadata.live ){
+			
 			/*
 				Finds the current song time visualization. If there is only one
 				song time visualization, then that's the one we adjust to represent
@@ -1984,6 +1988,7 @@ var Amplitude = (function () {
 				current_slider.value = ( ( config.active_song.currentTime / config.active_metadata.duration ) * 1000 ) * 100;
 			}else{
 				current_slider.value = ( config.active_song.currentTime / config.active_song.duration ) * 100;
+				console.log(current_slider);
 			}	
 		}
 	}
@@ -3599,6 +3604,7 @@ var Amplitude = (function () {
 				new_selected[i].classList.add("vin_active");
 				new_selected[i].classList.add("vin_playing");
 			}
+			privateChangeCoverBackground(new_index);
 		}
 	}
 	
@@ -3612,6 +3618,12 @@ var Amplitude = (function () {
 		}
 	}
 
+	function privateChangeCoverBackground(song_index) {
+		console.log("Index: "+song_index+" - "+config.songs[song_index].cover_url);
+		var elem = document.querySelector("#reproductor");
+		elem.style.background = "url('"+config.songs[song_index].cover_art_url+"')";	
+		elem.style.backgroundSize = "100% 100%";	
+	}
 	
 	/*
 		Defines which methods and variables are public.

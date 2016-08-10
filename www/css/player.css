@@ -9,7 +9,7 @@ div.hidden-on-collapse{
     Top Header
 */
 div#top-header{
-    background-color: #f2f2f2;
+    background-color: rgba(43,45,45,0.5)!important;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     height: 8%;
@@ -45,7 +45,7 @@ img#large-album-art{
 */
 div#small-player{
 	height: 20%;
-	background-color: #2B2D2D;
+	background-color: rgba(43,45,45,0.5);
     margin: auto;
     z-index: 99999;
 	border:0px!important;
@@ -178,7 +178,7 @@ div#small-player-full-bottom-controls{
 */
 div#small-player-full-bottom-info{
     margin: auto;
-    padding-top: 20px;
+    padding-top: 40px;
     width:95%;
     clear: both;
 }
@@ -402,4 +402,80 @@ img#soundcloud-image{
     margin: auto;
     margin-top: 10px;
     display: block;
+}
+
+
+/*===========RANGE INPUT=========*/
+input[type=range]{
+    -webkit-appearance: none;
+	border:none!important;
+	float:left;
+	margin-top:-7px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 78%;
+    height: 5px;
+    background: #fff;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    /*background: #ccc;*/
+}
+
+input[type="range"]::-webkit-slider-progress {
+  background-color: #8E45AD; 
+}
+
+
+input[type=range]{
+    /* fix for FF unable to apply focus style bug  */
+    border: 1px solid white; 
+
+    /*required for proper track sizing in FF*/
+    width: 78%;
+}
+
+input[type="range"]::-moz-range-progress {
+  background-color: #8E45AD; 
+}
+input[type=range]::-moz-range-track {
+    width: 300px;
+    height: 100px;
+    background:url('wave.png') 0px;
+	background-size:cover;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #8E45AD;
+	border:1px solid #333;
+	bottom:-1px;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
 }

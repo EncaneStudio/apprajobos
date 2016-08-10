@@ -6,6 +6,7 @@ attachFastClick(document.body);
 
 //function onDeviceReady() {
 $(document).ready(function() {
+	$( ".amplitude-song-slider" ).slider( "disable" );
 	$('#homepage').on('swipeleft', go);
 	$('#homepage').on('swiperight', go);
 	$( "#reproductor" ).load( "player.html" );

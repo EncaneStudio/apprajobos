@@ -5,7 +5,7 @@
 </div>
 
 <div id="top-large-album">
-	<img id="large-album-art" src="images/no-cover-large.png" amplitude-song-info="cover"/>
+	<!--<img id="large-album-art" src="images/no-cover-large.png" amplitude-song-info="cover"/>-->
 </div>
 
 <div id="small-player" data-role="footer" data-tap-toggle="false" data-position="fixed" data-fullscreen="true">
@@ -17,14 +17,13 @@
 		</div>
 		<div id="small-player-full-bottom-info">
 			<span class="current-time">
-				<span class="amplitude-current-minutes" amplitude-single-current-minutes="true">0</span>:<span class="amplitude-current-seconds" amplitude-single-current-seconds="true">00</span>
+				<span class="amplitude-current-hours" amplitude-single-current-hours="true">0</span>:<span class="amplitude-current-minutes" amplitude-single-current-minutes="true">0</span>:<span class="amplitude-current-seconds" amplitude-single-current-seconds="true">00</span>
 			</span>
 			
-			<div class="amplitude-song-time-visualization" amplitude-single-song-time-visualization="true" id="song-time-visualization-large"></div>
-			<input type="range" class="amplitude-song-slider" amplitude-singular-song-slider="true" value="0"/>
+			<input type="range" data-role="none" data-enhance="false"  class="amplitude-song-slider" amplitude-singular-song-slider="true" value="0"/>
 			
 			<span class="time-duration">
-				<span class="amplitude-duration-minutes" amplitude-single-duration-minutes="true">0</span>:<span class="amplitude-duration-seconds" amplitude-single-duration-seconds="true">00</span>
+				<span class="amplitude-duration-hours" amplitude-single-duration-hours="true">0</span>:<span class="amplitude-duration-minutes" amplitude-single-duration-minutes="true">0</span>:<span class="amplitude-duration-seconds" amplitude-single-duration-seconds="true">00</span>
 			</span>
 		</div>
 	</div>
