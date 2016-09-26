@@ -1045,12 +1045,19 @@ var Amplitude = (function () {
 	}
 
 	function privatePlayIndex(song_id) {
+		alert("aqui llego");
 		privateChangeSong(song_id);
+		alert("cambio de cancion");
 		privateResetSongStatusSliders();
+		alert("Reinicio el slider");
 		privateStartVisualization();
+		alert("Visualizo");
 		privatePlay();
+		alert("Reproduzco");
 		privateChangePlayPauseState("playing");
+		alert("Cambio status play/pause");
 		privateChangeActiveVinil(song_id);
+		alert("Cambio el vinilo");
 	}
 	/*--------------------------------------------------------------------------
 		HANDLER FOR: 'amplitude-pause'
