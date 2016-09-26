@@ -1,9 +1,14 @@
 alert("hola");
 var attachFastClick = Origami.fastclick;
+alert("paso el fastclick");
 attachFastClick(document.body);
+alert("paso el evento fastclick");
 document.addEventListener("deviceready", onDeviceReady, false);
+alert("escucho el deviceReady");
 document.addEventListener("offline", onOffline, false);
+alert("escucho el offline");
 document.addEventListener("backbutton", onBackButton, false);
+alert("escucho el backButton");
 
 function onDeviceReady() {
 	alert("llego al ondevice");
