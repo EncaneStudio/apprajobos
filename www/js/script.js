@@ -73,18 +73,15 @@ function onDeviceReady() {
 	
 	//Al pulsar sobre una cancion, se recoge la url que se guardo en canciones y se reproduce
 	$(".tracklist").on("click","li", function() {
+		alert("Click en cancion");
 		var id = $(this).find("a").attr("amplitude-song-index");
+		alert("La id es " +id);
 		Amplitude.playIndex(id);
+		alert("Pasamos por el amplitude");
 	});
 	
-	// Register callback 
-	MusicControls.subscribe(events);
-	alert("Registro el callback");
-	 
-	// Start listening for events 
-	// The plugin will run the events function each time an event is fired 
+	MusicControls.subscribe(events);	 
 	MusicControls.listen();
-	alert("Escucho");
 };
 
 
