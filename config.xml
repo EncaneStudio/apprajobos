@@ -12,8 +12,6 @@
   <plugin name="br.com.paveisitemas.splashscreen" spec="2.1.1" source="pgb" />
   <plugin name="com.phonegap.plugin.statusbar" spec="1.1.0" source="pgb" />
   <plugin name="cordova-plugin-dialogs" source="npm" /> 
-  <plugin name="org.crosswalk.engine" spec="1.3.0" source="pgb" />
-  <preference name="xwalkMode" value="lite" />
   <icon src="www/res/icon/android/drawable-xxxhdpi-icon.png"/>
   <access origin="*"/>
   <allow-intent href="file://*/*"/>

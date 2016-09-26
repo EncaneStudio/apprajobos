@@ -1,3 +1,4 @@
+alert("hola");
 var attachFastClick = Origami.fastclick;
 attachFastClick(document.body);
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -5,6 +6,7 @@ document.addEventListener("offline", onOffline, false);
 document.addEventListener("backbutton", onBackButton, false);
 
 function onDeviceReady() {
+	alert("llego al ondevice");
 //$(document).ready(function() {
 	$('#homepage').on('swipeleft', go);
 	$('#homepage').on('swiperight', go);
