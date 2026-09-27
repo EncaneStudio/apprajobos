@@ -243,13 +243,13 @@ export class Trail {
     this.fade = on ? Math.min(1, this.fade + dt * 12) : Math.max(0, this.fade - dt * 5);
     if (this.fade <= 0) { this.active = false; this.mesh.visible = false; return; }
     this.mesh.visible = true;
-    this.mat.uniforms.opacity.value = this.fade * 0.85;
+    this.mat.uniforms.opacity.value = this.fade * (this.maxOpacity || 0.85);
     const pos = this.geo.attributes.position.array, al = this.geo.attributes.alpha.array;
     for (let i = 0; i < this.len; i++) {
       const b = this.base[i], t = this.tip[i];
       pos[i * 6] = b.x; pos[i * 6 + 1] = b.y; pos[i * 6 + 2] = b.z;
       pos[i * 6 + 3] = t.x; pos[i * 6 + 4] = t.y; pos[i * 6 + 5] = t.z;
-      const a = 1 - i / (this.len - 1);
+      const a = Math.pow(1 - i / (this.len - 1), this.falloff || 1);
       al[i * 2] = a * 0.2; al[i * 2 + 1] = a;
     }
     this.geo.attributes.position.needsUpdate = true;

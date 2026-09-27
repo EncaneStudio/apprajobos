@@ -243,6 +243,8 @@ export class Player {
     this.mode = m;
     this.hebra.setMode(m);
     this.trail.mat.uniforms.color.value.set(m === 'rigid' ? 0xffe7a0 : 0x6fffd8);
+    this.trail.falloff = m === 'rigid' ? 1 : 2.5;
+    this.trail.maxOpacity = m === 'rigid' ? 0.85 : 0.5;
     if (!silent) {
       audio.play('switch');
       G.fx.sparkle(_v.copy(this.pos).setY(this.pos.y + 1.2), m === 'rigid' ? [1, 0.85, 0.4] : [0.4, 1, 0.8], 24);

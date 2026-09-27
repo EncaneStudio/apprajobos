@@ -206,6 +206,7 @@ class Game {
     for (const e of G.enemies) e.remove();
     G.enemies.length = 0;
     for (const id in this.world.campRuntime) { const rt = this.world.campRuntime[id]; rt.spawned = false; rt.enemies = []; }
+    this.world.roamers = [];
     clearProjectiles();
     G.lockTarget = null;
   }
@@ -265,10 +266,11 @@ class Game {
     audio.play('portal');
     this.fade(() => {
       this.clearEnemies();
-      const x = w.x, z = w.z + 4;
+      const x = w.x, z = w.z + 5.5;
       this.player.pos.set(x, getHeight(x, z), z);
       this.player.vel.set(0, 0, 0);
       this.player.state = 'ground';
+      this.player.facing = Math.PI;
       this.world.grass.cells.clear();
       G.cam.snapBehind(this.player);
       G.ui.regionName(w.name);
@@ -284,9 +286,10 @@ class Game {
       this.clearEnemies();
       let best = null, bd = 1e9;
       for (const w of WAYPOINTS) if (G.waypoints.has(w.id)) { const d = Math.hypot(w.x - pl.pos.x, w.z - pl.pos.z); if (d < bd) { bd = d; best = w; } }
-      const p = best ? new THREE.Vector3(best.x, 0, best.z + 4) : this.spawnPos();
+      const p = best ? new THREE.Vector3(best.x, 0, best.z + 5.5) : this.spawnPos();
       p.y = getHeight(p.x, p.z);
       pl.respawn(p);
+      if (best) pl.facing = Math.PI;
       this.world.grass.cells.clear();
     }
     G.cam.snapBehind(pl);

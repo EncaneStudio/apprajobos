@@ -47,13 +47,9 @@ export class ThirdPersonCam {
     // colisión con el terreno (muestreo a lo largo del rayo)
     let d = want;
     const env = G.env;
-    for (let s = 0.8; s <= want; s += 0.6) {
+    for (let s = 0.8; s <= want + 0.4; s += 0.5) {
       const x = tgt.x + dx * s, y = tgt.y + dy * s, z = tgt.z + dz * s;
-      if (y < env.heightAt(x, z) + 0.5) { d = Math.max(1.2, s - 0.6); break; }
-    }
-    if (G.inDungeon) {
-      // no atravesar paredes: acercar si el punto está fuera de las salas
-      d = Math.min(d, want);
+      if (y < env.heightAt(x, z) + 0.5 || (env.blocked && env.blocked(x, z, y))) { d = Math.max(1.2, s - 0.6); break; }
     }
     this.curDist = d < this.curDist ? d : damp(this.curDist, d, 3, rawDt);
     const c = this.cam.position;

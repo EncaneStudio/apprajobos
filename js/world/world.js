@@ -59,6 +59,7 @@ export class World {
       waterLevel: WATER_Y,
       waterDepth: (x, z, g) => WATER_Y - (g ?? getHeight(x, z)),
       collide: (pos, r, h) => this.colliders.resolve(pos, r, h),
+      blocked: (x, z, y) => this.colliders.blocked(x, z, y),
       clamp: (pos) => { pos.x = clamp(pos.x, -HALF + 45, HALF - 45); pos.z = clamp(pos.z, -HALF + 45, HALF - 45); },
       floorAt: null,
     };
@@ -333,6 +334,7 @@ export class World {
     for (const m of this.mushrooms) if (!m.mesh.visible && G.time > m.next) m.mesh.visible = true;
     this.amulet.visible = G.quests.atStage('sq_amuleto', 0) && !pl.count('amuleto_mira');
     this.updateCamps();
+    this.updateRoamers(dt);
     // regiones y niebla del mapa
     this.regionT -= dt;
     if (this.regionT <= 0) {
@@ -381,6 +383,32 @@ export class World {
         if (c.chest && !rt.chestOpened) G.ui.toast('El cofre del campamento se ha desbloqueado');
         pl.addXp(20 * c.lvl);
       }
+    }
+  }
+
+  // Monstruos errantes: espectros de noche, lobos en el bosque, trasgos en las praderas
+  updateRoamers(dt) {
+    this.roamT = (this.roamT ?? 20) - dt;
+    if (this.roamT > 0) return;
+    this.roamT = 15;
+    const pl = G.player;
+    this.roamers = (this.roamers || []).filter((e) => {
+      if (e.dead) return false;
+      if (e.pos.distanceTo(pl.pos) > 170 && !e.aggro) { e.remove(); const i = G.enemies.indexOf(e); if (i >= 0) G.enemies.splice(i, 1); return false; }
+      return true;
+    });
+    if (this.inVillage || this.roamers.length >= 4 || Math.random() < 0.35) return;
+    const night = G.dayTime < 5.5 || G.dayTime > 20;
+    const a = Math.random() * Math.PI * 2, r = rand(45, 65);
+    const x = pl.pos.x + Math.cos(a) * r, z = pl.pos.z + Math.sin(a) * r;
+    const h = getHeight(x, z);
+    if (h < 1 || Math.abs(x) > HALF - 60 || Math.abs(z) > HALF - 60 || Math.hypot(x - VILLAGE.x, z - VILLAGE.z) < 130) return;
+    const type = night ? 'wisp' : forestDensity(x, z) > 0.5 ? 'wolf' : 'goblin';
+    const lvl = clamp(Math.round(1 + Math.hypot(x - VILLAGE.x, z - VILLAGE.z) / 65), 1, 16);
+    const n = type === 'wisp' ? 1 : randInt(1, 3);
+    for (let i = 0; i < n; i++) {
+      const px = x + rand(-3, 3), pz = z + rand(-3, 3);
+      this.roamers.push(spawnEnemy(type, lvl, new THREE.Vector3(px, getHeight(px, pz), pz)));
     }
   }
 

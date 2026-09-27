@@ -81,6 +81,7 @@ export class Dungeon {
       waterDepth: null,
       collide: (pos, r, h) => { this.colliders.resolve(pos, r, h); for (const d of this.doors) if (d.closed) this.resolveDoor(d, pos, r); },
       clamp: () => {},
+      blocked: (x, z, y) => y < 7.5 && this.colliders.blocked(x, z, y),
       floorAt: null,
     };
   }

@@ -69,6 +69,8 @@ export class Hebra {
     this.targetLength = rigid ? 1.75 : (attacking ? 1.8 + (whipLen - 1.8) * ext : 1.7);
     this.length += (this.targetLength - this.length) * Math.min(1, dt * (attacking ? 25 : 8));
     const L = this.length, seg = L / (N - 1);
+    // tras un teletransporte, recolocar la cuerda
+    if (this.initialized && this.pts[N - 1].distanceToSquared(hand) > 144) this.initialized = false;
     if (!this.initialized) {
       for (let i = 0; i < N; i++) { this.pts[i].copy(hand).addScaledVector(dir, seg * i); this.prev[i].copy(this.pts[i]); }
       this.initialized = true;

@@ -58,6 +58,21 @@ export class Colliders {
     }
     return hit;
   }
+  // ¿Está el punto dentro de un colisionador grande? (para la cámara)
+  blocked(x, z, y) {
+    const l = this.query(x, z);
+    if (!l) return false;
+    for (const c of l) {
+      if (y > c.top || y < c.bottom) continue;
+      if (c.t === 0) { if (c.r > 1.0 && (x - c.x) ** 2 + (z - c.z) ** 2 < (c.r + 0.2) ** 2) return true; }
+      else {
+        const dx = x - c.x, dz = z - c.z;
+        const lx = dx * c.cos - dz * c.sin, lz = dx * c.sin + dz * c.cos;
+        if (Math.abs(lx) < c.hw + 0.2 && Math.abs(lz) < c.hd + 0.2) return true;
+      }
+    }
+    return false;
+  }
   // Altura de "suelo" extra (techo de cajas sobre las que se puede estar de pie)
   floorAt(x, z, y) {
     const l = this.query(x, z);

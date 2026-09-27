@@ -214,8 +214,8 @@ export class UI {
     let x = _v.x, yy = _v.y;
     const behind = _v.z > 1;
     if (behind) { x = -x; yy = -yy; }
-    const edge = behind || Math.abs(x) > 0.9 || Math.abs(yy) > 0.85;
-    if (edge) { const k = Math.max(Math.abs(x) / 0.9, Math.abs(yy) / 0.85); x /= k; yy /= k; if (behind) yy = -0.85; }
+    const edge = behind || Math.abs(x) > 0.9 || yy > 0.85 || yy < -0.55;
+    if (edge) { const k = Math.max(Math.abs(x) / 0.9, yy > 0 ? yy / 0.85 : -yy / 0.55); x /= k; yy /= k; if (behind) yy = -0.55; }
     m.style.display = 'block';
     m.style.transform = `translate(${(x * 0.5 + 0.5) * innerWidth}px, ${(-yy * 0.5 + 0.5) * innerHeight}px)`;
     this.el.markerDist.textContent = dist > 999 ? (dist / 1000).toFixed(1) + ' km' : Math.round(dist) + ' m';
