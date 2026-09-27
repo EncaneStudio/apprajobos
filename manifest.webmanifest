@@ -1,0 +1,10 @@
+{
+  "name": "Sylvaren: El Hilo Eterno",
+  "short_name": "Sylvaren",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#10202a",
+  "theme_color": "#10202a",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
