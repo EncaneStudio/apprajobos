@@ -192,6 +192,7 @@ h3 small { text-transform: none; color: var(--dim); letter-spacing: 0; }
 .slot b { position: absolute; right: 5px; bottom: 2px; font-size: 13px; }
 .slot.sel, .gi.sel, .qi.sel, .abl.sel { border-color: var(--cyan); background: rgba(79, 227, 255, 0.15); }
 .empty, .hint { color: var(--dim); font-size: 14px; padding: 6px 0; }
+.grid .empty { grid-column: 1 / -1; }
 .card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
 .card .ch { font-weight: 900; font-size: 17px; }
 .card .cr { font-size: 12px; color: var(--dim); margin: 4px 0; }
@@ -315,9 +316,9 @@ select { background: #1a2a34; color: #fff; border: 1px solid var(--line); border
 /* ---------- táctil ---------- */
 #touch, #touchUI { display: none; }
 body.touch #touch { display: block; position: fixed; inset: 0; z-index: 12; }
-body.touch #touchUI { display: flex; position: fixed; top: calc(90px + var(--safe-t)); right: calc(12px + var(--safe-r)); z-index: 13; flex-direction: column; gap: 8px; }
+body.touch #touchUI { display: flex; position: fixed; top: calc(8px + var(--safe-t)); right: calc(8px + var(--safe-r)); z-index: 13; flex-direction: row; gap: 6px; }
 #touchUI button { width: 42px; height: 42px; border-radius: 50%; background: rgba(10, 20, 28, 0.6); border: 1px solid rgba(255, 255, 255, 0.4); font-size: 19px; }
-body.touch #tracker { top: calc(16px + var(--safe-t)); right: calc(64px + var(--safe-r)); }
+body.touch #tracker { top: calc(84px + var(--safe-t)); left: calc(16px + var(--safe-l)); right: auto; text-align: left; max-width: 40vw; }
 #joy { position: absolute; left: calc(40px + var(--safe-l)); bottom: calc(40px + var(--safe-b)); width: 140px; height: 140px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: 2px solid rgba(255, 255, 255, 0.3); opacity: 0.6; }
 #joy.on { opacity: 1; }
 #joyKnob { position: absolute; left: 45px; top: 45px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255, 255, 255, 0.55); box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); }
@@ -336,14 +337,20 @@ body.canInteract .tb.i { display: flex; }
 .tb.ab { width: 46px; height: 46px; font-size: 20px; }
 .tb.ab1 { right: 200px; bottom: 170px; } .tb.ab2 { right: 160px; bottom: 220px; } .tb.ab3 { right: 206px; bottom: 236px; display: none; }
 .tb.pot { right: 244px; bottom: 110px; width: 44px; height: 44px; font-size: 18px; }
-body.touch #bottomRight { bottom: auto; top: calc(96px + var(--safe-t)); right: calc(62px + var(--safe-r)); }
-body.touch #minimap { width: 120px; height: 120px; }
-body.touch #prompt { bottom: calc(300px + var(--safe-b)); }
-body.touch #hebra { bottom: auto; top: calc(96px + var(--safe-t)); max-width: 52vw; }
+body.touch #bottomRight { bottom: auto; top: calc(58px + var(--safe-t)); right: calc(8px + var(--safe-r)); }
+body.touch #minimap { width: 100px; height: 100px; }
+body.touch #clock { display: none; }
+body.touch #prompt { bottom: calc(22px + var(--safe-b)); }
+body.touch #hebra { bottom: auto; top: calc(8px + var(--safe-t)); left: 50%; transform: translate(-50%, -10px); max-width: 40vw; padding: 6px 10px; }
+body.touch #hebra.on { transform: translate(-50%, 0); }
+body.touch #hebraText { font-size: 12px; }
+body.touch .hicon { width: 24px; height: 24px; }
 body.touch #feed { bottom: calc(200px + var(--safe-b)); }
-body.touch #style { top: 42%; }
+body.touch #style { top: calc(140px + var(--safe-t)); left: calc(16px + var(--safe-l)); right: auto; text-align: left; }
+body.touch #style .sbar { margin: 4px 0 0 0; }
+body.touch #combo { right: auto; left: 50%; top: 32%; transform: translateX(-50%); }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
   .cols { flex-direction: column; }
   .col.side { width: 100%; position: static; }
   .trees { grid-template-columns: 1fr; }
@@ -351,14 +358,28 @@ body.touch #style { top: 42%; }
   .mapWrap { flex-direction: column; align-items: center; }
   #bigMap { width: min(92vw, 70vh); height: min(92vw, 70vh); }
   .mapSide { width: 100%; }
+  .eqslots { width: 100%; }
+}
+@media (max-width: 900px) {
+  .col.side { width: 240px; }
+  .eqslots { width: 220px; }
   #hearts { max-width: 240px; }
   .heart { width: 20px; height: 18px; }
   #styleRank { font-size: 40px; }
   #combo { font-size: 18px; }
-  .eqslots { width: 100%; }
 }
 @media (max-height: 500px) {
-  .tgrid { height: 280px; }
+  .tgrid { height: 250px; }
   #styleRank { font-size: 34px; }
   .banner { top: 14%; }
+  .banner .bt { font-size: 26px; }
+  .diffs { grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
+  .diff { padding: 8px 6px; }
+  .dsHead h2 { font-size: 22px; }
+  .dsHead p { font-size: 13px; margin: 4px 0; }
+  .panel { padding: 12px 16px; max-height: 94vh; }
+  .tbtns { transform: scale(0.85); transform-origin: bottom right; }
+  #joy { transform: scale(0.85); }
+  #dlg { padding: 12px 18px 16px; }
+  #dlgText { font-size: 15px; min-height: 40px; }
 }

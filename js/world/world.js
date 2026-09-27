@@ -255,8 +255,10 @@ export class World {
       const id = 'echo_' + i;
       if (G.echoes.has(id)) return;
       const m = S.echoOrb();
-      m.userData.baseY = getHeight(x, z) + 1.4;
+      const gy = Math.max(getHeight(x, z), WATER_Y);
+      m.userData.baseY = gy + 1.4;
       this.place(m, x, z, 0, 1.4);
+      m.position.y = gy + 1.4;
       this.echoes.push({ id, mesh: m, x, z });
     });
     // setas en el bosque

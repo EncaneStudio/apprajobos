@@ -81,7 +81,6 @@ class Input {
           if (!this.touchActs[a]) this.edge[a] = true;
           this.touchActs[a] = t.identifier;
           btn.classList.add('on');
-          if (a === 'attack' || a === 'heavy') { camTouches.set(t.identifier, { x: t.clientX, y: t.clientY, btn: true }); }
           continue;
         }
         if (t.clientX < window.innerWidth * 0.42 && joyId === null) {

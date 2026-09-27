@@ -1,7 +1,16 @@
 import * as THREE from 'three';
 import { Simplex } from '../noise.js';
 import { clamp, lerp, smoothstep, canvasTexture } from '../util.js';
-import { PADS, PATHS, VILLAGE } from '../data/worlddata.js';
+import { PADS as BASE_PADS, PATHS, VILLAGE, WAYPOINTS, CAMPS, CHESTS } from '../data/worlddata.js';
+
+// Zonas aplanadas: las base + piedras de viento, campamentos y cofres (siempre sobre el agua)
+const PADS = [
+  ...BASE_PADS,
+  ...WAYPOINTS.map((w) => ({ x: w.x, z: w.z, r0: 6, r1: 16, h: 'auto' })),
+  ...CAMPS.map((c) => ({ x: c.x, z: c.z, r0: 13, r1: 28, h: 'auto' })),
+  ...CHESTS.map(([x, z]) => ({ x, z, r0: 3, r1: 8, h: 'auto' })),
+  { x: 262, z: 42, r0: 5, r1: 12, h: 'auto' },
+];
 
 export const WORLD = 1600, HALF = 800, WATER_Y = 0;
 export let SEG = 320;
@@ -46,7 +55,7 @@ function basicHeight(x, z) {
   // Estanques y marjal
   const p = nz2.fbm(x * 0.004 - 30, z * 0.004 + 50, 2);
   const marsh = smoothstep(260, 420, z) * smoothstep(-150, -330, x);
-  h -= smoothstep(-0.28 + marsh * 0.25, -0.55 + marsh * 0.2, p) * 22 * (1 - north);
+  h -= smoothstep(-0.3 + marsh * 0.25, -0.57 + marsh * 0.2, p) * 20 * (1 - north);
   // Ríos suaves: valle hacia el lago
   const river = Math.abs(nz.noise(x * 0.0022 + 5, z * 0.0022 - 9));
   h -= (1 - smoothstep(0.0, 0.05, river)) * 9 * (1 - north) * (1 - edge) * smoothstep(-100, 50, x);
@@ -60,8 +69,8 @@ export function rawHeight(x, z) {
     const d = Math.hypot(x - pd.x, z - pd.z);
     if (d < pd.r1) {
       let ph = pd.h;
-      if (ph === null) {
-        if (!padH.has(pd)) padH.set(pd, basicHeight(pd.x, pd.z));
+      if (ph === null || ph === 'auto') {
+        if (!padH.has(pd)) padH.set(pd, ph === 'auto' ? Math.max(2.5, basicHeight(pd.x, pd.z)) : basicHeight(pd.x, pd.z));
         ph = padH.get(pd);
       }
       h = lerp(h, ph, 1 - smoothstep(pd.r0, pd.r1, d));

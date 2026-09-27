@@ -41,7 +41,7 @@ void main(){
 }`;
 
 export function buildWater(quality) {
-  const seg = quality === 'baja' ? 120 : 200;
+  const seg = quality === 'baja' ? 100 : 150;
   const geo = new THREE.PlaneGeometry(WORLD, WORLD, seg, seg);
   geo.rotateX(-Math.PI / 2);
   const pos = geo.attributes.position;

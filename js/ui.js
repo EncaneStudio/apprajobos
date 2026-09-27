@@ -353,6 +353,7 @@ export class UI {
     this.open = null;
     G.paused = false;
     d?.onEnd?.();
+    if (!this.open) this.relock();
   }
 
   // ================= Menú principal =================
@@ -373,7 +374,9 @@ export class UI {
     G.paused = false;
     this.pendingAbility = null;
     audio.play('ui');
+    this.relock();
   }
+  relock() { if (!G.isTouch && G.started) { try { document.querySelector('#game').requestPointerLock?.()?.catch?.(() => {}); } catch (e) {} } }
   showTab(tab) {
     this.selTab = tab;
     document.querySelectorAll('#menu .tabs button').forEach((b) => b.classList.toggle('sel', b.dataset.tab === tab));
@@ -857,7 +860,7 @@ export function controlsHTML() {
   return `<div class="controls"><div><b>Ordenador</b></div>
     <div><kbd>WASD</kbd> Moverse · <kbd>Ratón</kbd> Cámara</div><div><kbd>Mayús</kbd> Esprintar · <kbd>Espacio</kbd> Saltar / doble salto / planear (mantener)</div>
     <div><kbd>Clic izq.</kbd> Golpe rápido · <kbd>Clic der.</kbd> Golpe pesado</div><div><kbd>Q</kbd> Cambiar Hebra: Espada ⇄ Látigo</div>
-    <div><kbd>C</kbd> Esquivar (esquiva perfecta = Tiempo Élfico)</div><div><kbd>F</kbd> / <kbd>Rueda</kbd> Fijar objetivo · <kbd>E</kbd> Interactuar</div>
+    <div><kbd>C</kbd> Esquivar (esquiva perfecta = Tiempo Élfico)</div><div><kbd>F</kbd> / <kbd>Clic central</kbd> Fijar objetivo · <kbd>Rueda</kbd> Zoom · <kbd>E</kbd> Interactuar</div>
     <div><kbd>1 2 3</kbd> Habilidades · <kbd>4</kbd>/<kbd>R</kbd> Poción</div><div><kbd>I</kbd> Inventario · <kbd>P</kbd> Habilidades · <kbd>J</kbd> Misiones · <kbd>M</kbd> Mapa · <kbd>Esc</kbd> Menú</div>
     <div><b>Combos</b></div><div>Espada: L-L-L-L · L-P (Alzamiento, mantén P para seguir al enemigo) · L-L-P (Tormenta) · En el aire: L-L-L, P = Caída Meteoro</div>
     <div>Látigo: L-L-L (Espiral) · P = Tirón (atrae enemigos o te lanza hacia los grandes) · Aire: P = Látigo Descendente</div>

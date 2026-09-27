@@ -39,6 +39,8 @@ export class NPC {
     this.t += dt;
     const pl = G.player;
     const d = this.pos.distanceTo(pl.pos);
+    this.group.visible = d < 110;
+    if (!this.group.visible) return;
     let moving = false;
     if (this.talking || d < 4) {
       this.facing = dampAngle(this.facing, Math.atan2(pl.pos.x - this.pos.x, pl.pos.z - this.pos.z), 5, dt);

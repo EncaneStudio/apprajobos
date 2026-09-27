@@ -6,12 +6,12 @@ import { getHeight, getNormal, forestDensity, pathDist, isSnow, northMask, HALF,
 import { VILLAGE } from '../data/worlddata.js';
 
 // ---------- Árboles y rocas instanciados por regiones ----------
-function broadleafGeos() {
+function broadleafGeos(detail = 1) {
   const trunk = mergeColored([
     { g: new THREE.CylinderGeometry(0.22, 0.38, 3.2, 7), c: 0x7a5a3c, p: [0, 1.6, 0] },
     { g: new THREE.CylinderGeometry(0.1, 0.16, 1.4, 5), c: 0x7a5a3c, p: [0.45, 2.6, 0], r: [0, 0, -0.8] },
   ]);
-  const I = new THREE.IcosahedronGeometry(1, 1);
+  const I = new THREE.IcosahedronGeometry(1, detail);
   const canopy = mergeColored([
     { g: I, c: 0x6fae3e, p: [0, 3.9, 0], s: [2.1, 1.7, 2.1] },
     { g: I, c: 0x7fbf48, p: [0.9, 4.6, 0.4], s: [1.4, 1.2, 1.4] },
@@ -81,7 +81,7 @@ export function buildVegetation(scene, colliders, exclusions, quality) {
     if (sc > 1.2) colliders.addCircle(px, pz, sc * 0.85, h + sc * 0.6, h - 2);
   }
 
-  const bl = broadleafGeos(), pn = pineGeos(), rk = rockGeo();
+  const bl = broadleafGeos(quality === 'baja' ? 0 : 1), pn = pineGeos(), rk = rockGeo();
   const trunkMat = vcToonMat(), canopyMat = vcToonMat(), rockMat = vcToonMat();
   const shadows = quality !== 'baja';
   const col = new THREE.Color();

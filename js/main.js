@@ -177,8 +177,9 @@ class Game {
   handleMenuKeys() {
     const ui = G.ui;
     if (ui.open === 'dialogue') {
-      if (input.pressed('interact') || input.pressed('jump') || input.pressed('attack')) ui.advanceDialogue();
-      if (input.pressed('pause')) ui.closeDialogue();
+      const adv = input.consume('interact') | input.consume('jump') | input.consume('attack');
+      if (adv) ui.advanceDialogue();
+      if (input.consume('pause')) ui.closeDialogue();
       return;
     }
     if (ui.open === 'death' || ui.open === 'title' || ui.open === 'ending') return;
