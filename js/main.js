@@ -107,6 +107,9 @@ class Game {
   }
   start(load) {
     audio.init();
+    if (G.isTouch) {
+      try { document.documentElement.requestFullscreen?.().then(() => screen.orientation?.lock?.('landscape').catch(() => {})).catch(() => {}); } catch (e) {}
+    }
     $('#title').classList.remove('on');
     G.ui.open = null;
     G.started = true; G.paused = false;
