@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Rajobos 3D</title>
+<title>Guardián Silverleaf</title>
 <style>
   html, body { margin: 0; height: 100%; background: #0e141a; color: #efe6cc; font-family: system-ui, sans-serif; overflow: hidden; }
   canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
@@ -14,15 +14,15 @@
 </style>
 </head>
 <body>
-<canvas id="c" aria-label="Modelo 3D de Rajobos"></canvas>
+<canvas id="c" aria-label="Modelo 3D del Guardián Silverleaf"></canvas>
 <div class="panel" id="anims"></div>
 <div class="panel bottom" id="tod"></div>
-<script src="three.min.js"></script>
+<script src="three-bundle.min.js"></script>
 <script src="rajobos3d.js"></script>
 <script>
-  var api = Rajobos3D.create(document.getElementById('c'));
+  var api = Rajobos3D.create(document.getElementById('c'), { modelUrl: 'guardian_rig.glb' });
   var ANIMS = [['reposo','Reposo'],['andar','Andar'],['correr','Correr'],['agacharse','Agacharse'],['sigilo','Sigilo'],['saltar','Saltar'],
-    ['combo','Combo de espada'],['giratorio','Ataque giratorio'],['escudo','Bloqueo'],['arco','Arco'],['planear','Paravela'],['nadar','Nadar'],['baile','Sesión DJ']];
+    ['combo','Combo de espada'],['giratorio','Ataque giratorio'],['escudo','Bloqueo'],['arco','Arco'],['planear','Paravela'],['nadar','Nadar'],['baile','Baile']];
   function group(el, items, fn, first) {
     items.forEach(function (it, i) {
       var b = document.createElement('button'); b.textContent = it[1];

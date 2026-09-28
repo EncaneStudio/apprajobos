@@ -431,6 +431,8 @@
 
     /* ================= PERSONAJE ================= */
     var HIP_Y = 0.99;
+    var LEG = { th: 0.44, sh: 0.405, ft: 0.082, off: 0.07, hip: HIP_Y };
+    var MODEL = null;
     var root = grp(scene);
     var rig = grp(root, [0, HIP_Y, 0]);
     var hips = grp(rig);
@@ -1013,11 +1015,11 @@
     }
     function legH(v, f) {
       var tx = v['thigh' + f + '.x'] || 0, tz = v['thigh' + f + '.z'] || 0, kx = v['shin' + f + '.x'] || 0;
-      return (0.44 * Math.cos(tx) + 0.405 * Math.cos(tx + kx)) * Math.cos(tz) + 0.082;
+      return (LEG.th * Math.cos(tx) + LEG.sh * Math.cos(tx + kx)) * Math.cos(tz) + LEG.ft;
     }
     function autoHips(p, extra) {
       var h = Math.max(legH(p.v, 'L'), legH(p.v, 'R'));
-      p.s('hipsY', h + 0.07 - HIP_Y + (extra || 0));
+      p.s('hipsY', h + LEG.off - LEG.hip + (extra || 0));
     }
     function flatFeet(p) {
       ['L', 'R'].forEach(function (f) { p.v['foot' + f + '.x'] = -((p.v['thigh' + f + '.x'] || 0) + (p.v['shin' + f + '.x'] || 0)) + (p.v['foot' + f + '.x'] || 0); });
@@ -1277,6 +1279,7 @@
       bow.visible = !!flags.bow;
       phonesHead.visible = !!flags.phones; phonesNeck.visible = !flags.phones;
       trailInit = false;
+      if (MODEL) MODEL.flags(flags);
     }
     applyFlags({});
 
@@ -1501,6 +1504,7 @@
         if (fade >= 1) prev = null;
       }
       applyPose(v, sdt);
+      if (MODEL) MODEL.drive(v);
       scene.updateMatrixWorld();
       updateBow(v, sdt);
       updateTrail(v, sdt);
@@ -1520,13 +1524,191 @@
     }
     loop();
 
+
+    /* ================= MODELO EXTERNO (GLB con esqueleto) ================= */
+    function attachModel(gltf) {
+      var mroot = gltf.scene;
+      var skinned = [], bones = {};
+      mroot.traverse(function (o) {
+        if (o.isSkinnedMesh) skinned.push(o);
+        if (o.isBone) bones[o.name] = o;
+      });
+      if (!skinned.length || !bones.hips) throw new Error('El GLB no trae malla con esqueleto');
+      mroot.updateMatrixWorld(true);
+      // 1) reorientar huesos: torso alineado con el mundo, extremidades con -Y hacia la siguiente articulación
+      var DOWN = new T.Vector3(0, -1, 0);
+      var chain = { uArmL: 'lArmL', lArmL: 'handL', uArmR: 'lArmR', lArmR: 'handR', thighL: 'shinL', shinL: 'footL', thighR: 'shinR', shinR: 'footR' };
+      var list = [];
+      mroot.traverse(function (o) { if (o.isBone) list.push(o); });
+      var oldW = {};
+      list.forEach(function (b) { oldW[b.uuid] = b.matrixWorld.clone(); });
+      var wp = {};
+      list.forEach(function (b) { wp[b.name] = new T.Vector3().setFromMatrixPosition(b.matrixWorld); });
+      function desiredQ(b) {
+        var n = b.name;
+        if (chain[n]) return new T.Quaternion().setFromUnitVectors(DOWN, wp[chain[n]].clone().sub(wp[n]).normalize());
+        if (n === 'handL' || n === 'handR') { var up = n === 'handL' ? 'lArmL' : 'lArmR'; return new T.Quaternion().setFromUnitVectors(DOWN, wp[n].clone().sub(wp[up]).normalize()); }
+        if (B[n]) return new T.Quaternion();
+        return null;
+      }
+      var pm = new T.Matrix4(), m = new T.Matrix4(), p = new T.Vector3(), q = new T.Quaternion(), sc = new T.Vector3();
+      list.forEach(function (b) {
+        oldW[b.uuid].decompose(p, q, sc);
+        var dq = desiredQ(b);
+        if (dq) q.copy(dq);
+        m.compose(p, q, sc);
+        pm.copy(b.parent.matrixWorld).invert();
+        m.premultiply(pm);
+        m.decompose(b.position, b.quaternion, b.scale);
+        b.updateMatrixWorld(true);
+      });
+      skinned.forEach(function (sm) { sm.skeleton.calculateInverses(); sm.skeleton.pose && 0; });
+      var rest = {};
+      list.forEach(function (b) { rest[b.name] = { p: b.position.clone(), q: b.quaternion.clone() }; });
+      // 2) proporciones del modelo para el ajuste de caderas
+      var hipsW = wp.hips.y;
+      LEG.th = wp.thighL.distanceTo(wp.shinL); LEG.sh = wp.shinL.distanceTo(wp.footL);
+      LEG.ft = wp.footL.y; LEG.off = hipsW - wp.thighL.y; LEG.hip = hipsW;
+      rig.position.y = hipsW;
+      // 3) materiales cel-shading + contorno para mallas con piel
+      skinned.forEach(function (sm) {
+        var src = sm.material; sm.userData.srcMat = src;
+        var tm = toon('#ffffff', src.map, { normalMap: src.normalMap || null });
+        if (src.map) src.map.encoding = T.sRGBEncoding;
+        sm.material = tm; sm.userData.toonMat = tm;
+        sm.castShadow = true; sm.receiveShadow = true;
+        sm.frustumCulled = false;
+        var ol = new T.SkinnedMesh(sm.geometry, outlineMat(0.0045));
+        ol.bind(sm.skeleton, sm.bindMatrix);
+        ol.frustumCulled = false; ol.castShadow = false;
+        sm.parent.add(ol); ol.position.copy(sm.position); ol.quaternion.copy(sm.quaternion); ol.scale.copy(sm.scale);
+        outlineMeshes.push(ol); ol.visible = outlineOn; sm.userData.outline = ol;
+      });
+      // 4) ocultar el cuerpo procedural y mover el equipo a los huesos del modelo
+      rig.traverse(function (o) { if (o.isMesh) o.userData.procVisible = o.visible; });
+      [hips, spine].forEach(function (g) { g.children.forEach(function (c) { if (c.isMesh) c.visible = false; }); });
+      var keep = [swordHold, sword, shield, bow, glider, phonesHead];
+      function hideProc(g) {
+        g.children.forEach(function (c) {
+          if (keep.indexOf(c) >= 0) return;
+          if (c.isMesh) c.visible = false;
+          if (c.children && c.children.length) hideProc(c);
+        });
+      }
+      hideProc(rig);
+      sheath.visible = false; phonesNeck.visible = false;
+      function reparent(obj, bone, pos, rot) {
+        bone.add(obj); if (pos) obj.position.set(pos[0], pos[1], pos[2]); if (rot) obj.rotation.set(rot[0], rot[1], rot[2]);
+      }
+      reparent(armR.sock, bones.handR, [0.022, -0.06, 0.0]);
+      reparent(bowSock, bones.handL, [-0.022, -0.06, 0.0]);
+      reparent(shieldArm, bones.lArmL, [0.075, -0.1, 0.0], [0, PI / 2, 0]);
+      reparent(glider, bones.chest, [0, -0.1, 0]);
+      reparent(phonesHead, bones.head, [0, 0.17, 0.0]); phonesHead.scale.setScalar(1.25);
+      MAT.gripWrap.color.set('#2f8f93'); MAT.gem.color.set('#7a55d6');
+      root.add(mroot);
+      var e = new T.Euler(0, 0, 0, 'XYZ'), eq = new T.Quaternion();
+      var SPREAD = 0.2;
+      MODEL = {
+        root: mroot, bones: bones, rest: rest, skinned: skinned,
+        flags: function (f) {
+          var hideRope = f.sword || f.bow || f.glider || f.swim || f.phones;
+          if (bones.rope) bones.rope.scale.setScalar(hideRope ? 0.0001 : 1);
+          if (bones.hilt) bones.hilt.scale.setScalar(f.sword ? 0.0001 : 1);
+          sword.visible = !!f.sword;
+          shield.visible = !!f.shield;
+        },
+        drive: function (v) {
+          BONES.forEach(function (n) {
+            if (n === 'rig') return;
+            var b = bones[n]; if (!b) return;
+            var g = B[n];
+            e.order = g.rotation.order;
+            var zs = n === 'uArmL' ? SPREAD : (n === 'uArmR' ? -SPREAD : 0);
+            e.set(g.rotation.x, g.rotation.y, g.rotation.z + zs);
+            if (n === 'hips') {
+              b.quaternion.setFromEuler(e).premultiply(rig.quaternion);
+              b.position.copy(rest.hips.p); b.position.y += g.position.y;
+            } else {
+              b.quaternion.setFromEuler(e);
+            }
+          });
+        }
+      };
+      MODEL.flags(flags);
+    }
+
+    var LOOPS = { reposo: 6, andar: 1 / 0.95, correr: 1 / 1.35, agacharse: 4, sigilo: 1 / 0.62, saltar: 1.5, combo: 2.2, giratorio: 2.6, escudo: 1.8, arco: 2.4, planear: TAU / 1.3, nadar: 1 / 0.7, baile: 4 / (124 / 60) };
+    function bakeClips(fps) {
+      if (!MODEL) throw new Error('Sin modelo');
+      fps = fps || 30;
+      var clips = [];
+      Object.keys(ANIMS).forEach(function (name) {
+        var a = ANIMS[name], dur = LOOPS[name] || 2, f = name === 'giratorio' ? 60 : fps;
+        var n = Math.max(2, Math.round(dur * f) + 1), times = [], q = {}, hp = [];
+        Object.keys(MODEL.bones).forEach(function (bn) { q[bn] = []; });
+        for (var i = 0; i < n; i++) {
+          var t = i / (n - 1) * dur; times.push(t);
+          var v = evalAnim(a, t);
+          for (var k = 0; k < BONES.length; k++) {
+            var bnm = BONES[k], o = B[bnm];
+            o.rotation.set(v[bnm + '.x'] || 0, v[bnm + '.y'] || 0, v[bnm + '.z'] || 0);
+          }
+          hips.position.y = v.hipsY || 0;
+          MODEL.drive(v);
+          Object.keys(MODEL.bones).forEach(function (bn) { var b = MODEL.bones[bn]; q[bn].push(b.quaternion.x, b.quaternion.y, b.quaternion.z, b.quaternion.w); });
+          var hb = MODEL.bones.hips; hp.push(hb.position.x, hb.position.y + (v.rootY || 0), hb.position.z);
+        }
+        var tracks = [];
+        Object.keys(q).forEach(function (bn) { tracks.push(new T.QuaternionKeyframeTrack(bn + '.quaternion', times, q[bn])); });
+        tracks.push(new T.VectorKeyframeTrack('hips.position', times, hp));
+        clips.push(new T.AnimationClip(name, dur, tracks));
+      });
+      return clips;
+    }
+    function exportGLB() {
+      return new Promise(function (resolve, reject) {
+        var clips = bakeClips(30);
+        var mroot = MODEL.root, stash = [];
+        Object.keys(MODEL.bones).forEach(function (bn) {
+          var b = MODEL.bones[bn];
+          b.children.slice().forEach(function (c) { if (!c.isBone) { stash.push([b, c]); b.remove(c); } });
+          b.position.copy(MODEL.rest[bn].p); b.quaternion.copy(MODEL.rest[bn].q); b.scale.set(1, 1, 1);
+        });
+        MODEL.skinned.forEach(function (sm) { sm.material = sm.userData.srcMat; });
+        var ols = MODEL.skinned.map(function (sm) { var ol = sm.userData.outline; ol.parent.remove(ol); return ol; });
+        var uds = MODEL.skinned.map(function (sm) { var u = sm.userData; sm.userData = {}; return u; });
+        MODEL.skinned.forEach(function (sm) { var m = sm.material; ['map', 'normalMap', 'roughnessMap', 'metalnessMap', 'emissiveMap', 'aoMap'].forEach(function (k) { if (m[k]) m[k].userData.mimeType = 'image/jpeg'; }); });
+        var parent = mroot.parent; parent.remove(mroot);
+        var saved = { p: mroot.position.clone(), q: mroot.quaternion.clone() };
+        mroot.position.set(0, 0, 0); mroot.quaternion.identity(); mroot.updateMatrixWorld(true);
+        function restore() {
+          parent.add(mroot); mroot.position.copy(saved.p); mroot.quaternion.copy(saved.q);
+          MODEL.skinned.forEach(function (sm, i) { sm.userData = uds[i]; sm.material = sm.userData.toonMat; sm.parent.add(ols[i]); });
+          stash.forEach(function (s) { s[0].add(s[1]); });
+          MODEL.flags(flags);
+        }
+        new T.GLTFExporter().parse(mroot, function (res) { restore(); resolve(res); }, function (err) { restore(); reject(err); }, { binary: true, animations: clips });
+      });
+    }
+    var outlineOn = opts.outline !== false;
+    if (opts.modelUrl) {
+      new T.GLTFLoader().load(opts.modelUrl, function (g) {
+        try { attachModel(g); if (opts.onModel) opts.onModel(null); }
+        catch (err) { if (opts.onModel) opts.onModel(err); }
+      }, undefined, function (err) { if (opts.onModel) opts.onModel(err || new Error('load')); });
+    }
+
     var api = {
       play: play,
       list: function () { return Object.keys(ANIMS); },
       current: function () { return cur.name; },
+      scene: scene,
+      exportGLB: exportGLB,
+      hasModel: function () { return !!MODEL; },
       setSpeed: function (x) { speedMul = x; },
       setTimeOfDay: setTimeOfDay,
-      setOutline: function (on) { outlineMeshes.forEach(function (m) { m.visible = !!on; }); },
+      setOutline: function (on) { outlineOn = !!on; outlineMeshes.forEach(function (m) { m.visible = !!on; }); },
       setAutoRotate: function (on) { cam.auto = !!on; },
       resetCamera: function () { camGoal.theta = yaw + 0.35; camGoal.phi = 1.36; camGoal.dist = 4.6; },
       // depuración: fija una animación en un instante y una vista
