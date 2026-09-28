@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rajobos 3D</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #0e141a; color: #efe6cc; font-family: system-ui, sans-serif; overflow: hidden; }
+  canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+  .panel { position: fixed; left: 16px; top: 16px; display: flex; flex-wrap: wrap; gap: 6px; max-width: 520px; }
+  .panel.bottom { top: auto; bottom: 16px; }
+  button { min-height: 40px; padding: 0 12px; border-radius: 4px; border: 1px solid rgba(233,220,180,.3); background: rgba(10,15,20,.75); color: #efe6cc; font: 600 14px system-ui, sans-serif; cursor: pointer; }
+  button.on { border-color: #6fd6ff; background: rgba(80,190,240,.22); color: #fff; }
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="Modelo 3D de Rajobos"></canvas>
+<div class="panel" id="anims"></div>
+<div class="panel bottom" id="tod"></div>
+<script src="three.min.js"></script>
+<script src="rajobos3d.js"></script>
+<script>
+  var api = Rajobos3D.create(document.getElementById('c'));
+  var ANIMS = [['reposo','Reposo'],['andar','Andar'],['correr','Correr'],['agacharse','Agacharse'],['sigilo','Sigilo'],['saltar','Saltar'],
+    ['combo','Combo de espada'],['giratorio','Ataque giratorio'],['escudo','Bloqueo'],['arco','Arco'],['planear','Paravela'],['nadar','Nadar'],['baile','Sesión DJ']];
+  function group(el, items, fn, first) {
+    items.forEach(function (it, i) {
+      var b = document.createElement('button'); b.textContent = it[1];
+      if (i === first) b.className = 'on';
+      b.onclick = function () { [].forEach.call(el.children, function (c) { c.className = ''; }); b.className = 'on'; fn(it[0]); };
+      el.appendChild(b);
+    });
+  }
+  group(document.getElementById('anims'), ANIMS, api.play, 0);
+  group(document.getElementById('tod'), [['dia','Día'],['atardecer','Atardecer'],['noche','Noche']], api.setTimeOfDay, 0);
+</script>
+</body>
+</html>
