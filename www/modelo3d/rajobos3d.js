@@ -1692,11 +1692,40 @@
       });
     }
     var outlineOn = opts.outline !== false;
+    // Construye un GLB en memoria a partir de un glTF JSON con el binario en extras.rjBin (sin URLs blob:/data:)
+    function makeGLB(j) {
+      var b64 = j.extras.rjBin; delete j.extras.rjBin;
+      var raw = atob(b64), bin = new Uint8Array(raw.length);
+      for (var i = 0; i < raw.length; i++) bin[i] = raw.charCodeAt(i);
+      var js = new TextEncoder().encode(JSON.stringify(j));
+      var jl = Math.ceil(js.length / 4) * 4, bl = Math.ceil(bin.length / 4) * 4;
+      var out = new Uint8Array(12 + 8 + jl + 8 + bl), dv = new DataView(out.buffer);
+      dv.setUint32(0, 0x46546C67, true); dv.setUint32(4, 2, true); dv.setUint32(8, out.length, true);
+      dv.setUint32(12, jl, true); dv.setUint32(16, 0x4E4F534A, true);
+      out.set(js, 20); for (var k = js.length; k < jl; k++) out[20 + k] = 0x20;
+      dv.setUint32(20 + jl, bl, true); dv.setUint32(24 + jl, 0x004E4942, true);
+      out.set(bin, 28 + jl);
+      return out.buffer;
+    }
+    function modelFail(err) { if (opts.onModel) opts.onModel(err || new Error('load')); }
     if (opts.modelUrl) {
-      new T.GLTFLoader().load(opts.modelUrl, function (g) {
-        try { attachModel(g); if (opts.onModel) opts.onModel(null); }
-        catch (err) { if (opts.onModel) opts.onModel(err); }
-      }, undefined, function (err) { if (opts.onModel) opts.onModel(err || new Error('load')); });
+      rig.visible = false;
+      fetch(opts.modelUrl).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' al pedir el modelo');
+        return r.arrayBuffer();
+      }).then(function (buf) {
+        var u8 = new Uint8Array(buf), data = buf, base = opts.modelBase != null ? opts.modelBase : '';
+        var glb = u8[0] === 0x67 && u8[1] === 0x6C && u8[2] === 0x54 && u8[3] === 0x46;
+        if (!glb) {
+          var j = JSON.parse(new TextDecoder().decode(u8));
+          if (j.extras && j.extras.rjBin) data = makeGLB(j);
+        }
+        var loader = new T.GLTFLoader();
+        loader.parse(data, base, function (g) {
+          try { attachModel(g); if (opts.onModel) opts.onModel(null); }
+          catch (err) { modelFail(err); }
+        }, modelFail);
+      }).catch(modelFail);
     }
 
     var api = {
