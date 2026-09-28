@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#10202a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Sylvaren: El Hilo Eterno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg">
+<script type="importmap">{ "imports": { "three": "./lib/three.module.min.js" } }</script>
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- Carga -->
+<div id="loading"><div class="logo">SYLVAREN</div><div class="sub">El Hilo Eterno</div><div class="spinner"></div><div id="loadMsg">Cargando...</div></div>
+
+<!-- Título -->
+<div id="title" class="overlay">
+  <div class="titleBox">
+    <div class="logo">SYLVAREN</div>
+    <div class="sub">— El Hilo Eterno —</div>
+    <div class="menuBtns">
+      <button id="btnContinue">Continuar</button>
+      <button id="btnNew">Nueva partida</button>
+      <button id="btnControls">Controles</button>
+    </div>
+    <div id="controlsHelp" class="helpBox"></div>
+    <div class="credits">Un mundo abierto de fantasía · Combate hack &amp; slash con Hebra, la espada-cuerda parlante</div>
+  </div>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <div id="topLeft">
+    <div id="hearts"></div>
+    <div class="manabar"><i id="manaFill"></i></div>
+    <div class="lvlrow"><span class="lvlb">Nv <b id="lvl">1</b></span><div class="xpbar"><i id="xpFill"></i></div><span class="goldb">🪙 <b id="gold">0</b></span></div>
+  </div>
+  <div id="bossbar"><div id="bossName"></div><div class="bb"><i id="bossLag"></i><i id="bossFill"></i></div></div>
+  <div id="region"></div>
+  <div id="banner" class="banner"></div>
+  <div id="tracker"></div>
+  <div id="style"><div id="styleRank">D</div><div id="styleName"></div><div class="sbar"><i id="styleFill"></i></div></div>
+  <div id="combo"></div>
+  <div id="toasts"></div>
+  <div id="feed"></div>
+  <div id="hebra"><div class="hicon"></div><div><div class="hname">Hebra</div><div id="hebraText"></div></div></div>
+  <div id="prompt"></div>
+  <div id="bottomRight">
+    <div id="clock"></div>
+    <canvas id="minimap" width="170" height="170"></canvas>
+  </div>
+  <div id="bottomLeft"><div id="modeIcon" class="mode"></div><div id="abilities"></div></div>
+  <svg id="stamina" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" class="sbg"/><circle id="staminaArc" cx="22" cy="22" r="18" class="sfg"/></svg>
+  <div id="barLayer"></div>
+  <div id="dmgLayer"></div>
+  <div id="reticle"></div>
+  <div id="qmarker"><div class="pin"></div><span id="qmarkerDist"></span></div>
+  <div id="saveIcon">💾</div>
+</div>
+<div id="flash"></div>
+<div id="slowmo"></div>
+
+<!-- Diálogo -->
+<div id="dlg"><div class="dlgName"><span id="dlgName"></span><small id="dlgRole"></small></div><div id="dlgText"></div><div id="dlgOpts"></div><div class="dlgNext">▼</div></div>
+
+<!-- Menú -->
+<div id="menu" class="overlay">
+  <div class="menuTop">
+    <div class="tabs">
+      <button data-tab="inventario">🎒 Inventario</button>
+      <button data-tab="equipo">🛡️ Equipo</button>
+      <button data-tab="habilidades">✨ Habilidades</button>
+      <button data-tab="personaje">🧝 Personaje</button>
+      <button data-tab="misiones">📜 Misiones</button>
+      <button data-tab="mapa">🗺️ Mapa</button>
+      <button data-tab="ajustes">⚙️ Ajustes</button>
+    </div>
+    <button id="menuClose" class="x">✕</button>
+  </div>
+  <div id="menuBody" class="body"></div>
+</div>
+
+<div id="shop" class="overlay"><div id="shopBox" class="panel"></div></div>
+<div id="dsel" class="overlay"><div id="dselBox" class="panel"></div></div>
+<div id="dcomp"></div>
+<div id="rest" class="overlay"><div class="panel restBox"><h2>🔥 Descansar junto a la hoguera</h2><p>Restaura vida y espíritu. ¿Hasta cuándo quieres descansar?</p>
+  <div class="row"><button class="btn" data-h="7">🌅 Mañana</button><button class="btn" data-h="12">☀️ Mediodía</button><button class="btn" data-h="18.5">🌇 Atardecer</button><button class="btn" data-h="22">🌙 Noche</button></div>
+  <div class="row"><button class="btn alt" data-close>Cancelar</button></div></div></div>
+<div id="death" class="overlay"><div class="deathBox"><div class="dt">Has caído</div><p>Hebra tira de ti de vuelta a la vida...</p><button id="deathBtn" class="btn">Continuar</button></div></div>
+<div id="ending" class="overlay"><div class="endBox"><div class="logo">SYLVAREN</div><h2>El Hilo Eterno ha sido restaurado</h2>
+  <p>El Heraldo del Vacío ha caído y la luz vuelve a tejer Sylvaren. Eryn y Hebra se han convertido en leyenda.</p>
+  <p>Pero la aventura no termina: quedan mazmorras en dificultad Mítica, Ecos por descubrir y tesoros legendarios esperándote.</p>
+  <p class="thx">¡Gracias por jugar!</p><button id="endBtn" class="btn">Seguir explorando</button></div></div>
+<div id="fade"></div>
+<div id="rotate"><div>📱↻</div><p>Gira el dispositivo para jugar en horizontal</p></div>
+
+<!-- Controles táctiles -->
+<div id="touch">
+  <div id="joy"><div id="joyKnob"></div></div>
+  <div class="tbtns">
+    <button data-act="attack" class="tb big a">⚔️</button>
+    <button data-act="heavy" class="tb h">💥</button>
+    <button data-act="jump" class="tb j">⤒</button>
+    <button data-act="dodge" class="tb d">💨</button>
+    <button data-act="switch" class="tb s">🔄</button>
+    <button data-act="lock" class="tb l">🎯</button>
+    <button data-act="sprint" class="tb sp">🏃</button>
+    <button data-act="interact" class="tb i">✋</button>
+    <button data-act="ab1" class="tb ab ab1">·</button>
+    <button data-act="ab2" class="tb ab ab2">·</button>
+    <button data-act="ab3" class="tb ab ab3">·</button>
+    <button data-act="potion" class="tb pot">🧪</button>
+  </div>
+</div>
+<div id="touchUI"><button data-uiact="inventory">🎒</button><button data-uiact="map">🗺️</button><button data-uiact="quests">📜</button><button data-uiact="skills">✨</button></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
