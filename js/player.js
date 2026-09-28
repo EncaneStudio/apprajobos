@@ -3,6 +3,7 @@ import { G } from './state.js';
 import { input } from './input.js';
 import { audio } from './audio.js';
 import { buildHumanoid, applyPose, blendPoses, locoPose, idlePose } from './models.js';
+import { loadGuardian, guardianReady, attachGuardian, driveGuardian } from './guardian.js';
 import { Hebra } from './sword.js';
 import { Trail } from './effects.js';
 import { ATTACKS, POSES, sampleKeys, hitEnemy, softTarget, abilityAvailable, computeDamage } from './combat.js';
@@ -95,6 +96,8 @@ export class Player {
     if (this.rig) this.group.remove(this.rig.root);
     const ol = G.quality === 'baja' ? 0 : 0.02;
     this.rig = buildHumanoid(this.look(), { outline: ol });
+    if (guardianReady()) attachGuardian(this.rig, { outline: ol > 0 });
+    else loadGuardian().then((m) => { if (m && this.rig && !this.rig.guardian) this.rebuildModel(); });
     this.group.add(this.rig.root);
     this.rig.torso.add(this.sail);
     this.sail.position.set(0, 1.3, 0);
@@ -774,6 +777,7 @@ export class Player {
       }
     }
     applyPose(rig, pose, k);
+    driveGuardian(rig);
     bodyRot.x = this.state === 'dodge' || (pose === POSES.airTuck) ? bodyX : damp(bodyRot.x, bodyX, 10, dt);
     this.group.rotation.y = this.facing + bodyYextra;
     // parpadeo con invulnerabilidad tras golpe

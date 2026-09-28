@@ -56,6 +56,7 @@ css/style.css       Interfaz
 lib/                Three.js r170 (MIT)
 js/main.js          Arranque, bucle de juego, transiciones y guardado
 js/player.js        Eryn: movimiento, estados, animación y combos
+js/guardian.js      Modelo del protagonista (assets/guardian.glb) movido por el rig procedural
 js/sword.js         Hebra: cuerda verlet que pasa de espada a látigo
 js/combat.js        Ataques, poses, medidor de estilo y daño
 js/enemies.js       Monstruos, jefes, IA y proyectiles
